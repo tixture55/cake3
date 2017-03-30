@@ -2,6 +2,13 @@
 /**
  * /app/Controller/HellosController.php
  */
+namespace App\Controller;
+
+use Cake\Core\Configure;
+use Cake\Network\Exception\NotFoundException;
+use Cake\View\Exception\MissingTemplateException;
+use App\Controller\AppController;
+
 require_once('FacadeLogicController.php');
 class HellosController extends AppController
 {
@@ -11,7 +18,7 @@ class HellosController extends AppController
 	protected $list;  // user情報
 	protected $history;  //出金履歴
 	public $uses = array('User');
-  protected $fbrl;
+        protected $fbrl;
 
 
 	public function __construct($as = null, $r = null){
