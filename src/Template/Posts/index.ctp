@@ -10,9 +10,11 @@ body {
 -->
 </style>
 <title>form</title>
-<script src="<?php echo $this->Html->url('/js/jquery-1.10.1.min.js'); ?>"></script>
+<script src="<?php echo $this->Html->script('/js/jquery-1.10.1.min.js'); ?>"></script>
 <link rel="stylesheet" href="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.css'); ?>">
 <script src="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
+
+<?php echo $this->Html->script('/js/957df7.js'); ?>
 
 <script>
 $(function() {
@@ -46,7 +48,7 @@ collapsible: true
 
 <?php
 
-if($posts){
+/*if($posts){
 	foreach ($posts as $this->value) {
 		echo '<tr>';
 		echo '<td>';
@@ -65,6 +67,37 @@ if($posts){
 		}
 	echo '</table>';
 }
+*/
+if($users){
+	foreach ($users as $this->value) {
+		echo '<tr>';
+		echo '<td>';
+		echo $this->value['name'];
+		echo '</td>';
+		echo '<td>';
+		echo $this->value['work'];
+		echo '</td>';
+		echo '<td>';
+		echo $this->value['ticket_num'];
+		echo '</td>';
+		echo '<td>';
+		echo $this->value['last_update'];
+		echo '</td>';
+		echo '</tr>';
+		}
+	echo '</table>';
+}
+
+
+?>
+<div class="paging">
+    <?= $this->Paginator->prev('<< ' . __('prev')); ?>
+    <?= $this->Paginator->numbers(); ?>
+    <?= $this->Paginator->next(__('next') . ' >>'); ?>
+</div>
+<?php
+	echo '<br>';
+	echo '<br>';
 	echo '<div id="accordion">';
 	echo '<h3>直近のISSUE</h3>';
 ?>
