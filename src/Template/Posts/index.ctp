@@ -75,8 +75,11 @@ if($users){
 		echo $this->value['name'];
 		echo '</td>';
 		echo '<td>';
-		echo $this->value['work'];
-		echo '</td>';
+		?>
+		<a href="<?php echo $this->Url->build(['controller'=>'Task', 'action'=>'detail', 'taskId' => 77]); ?>" class="something"><?php echo $this->value['work']; ?></a>
+
+		<?php
+                echo '</td>';
 		echo '<td>';
 		echo $this->value['ticket_num'];
 		echo '</td>';

@@ -30,6 +30,7 @@ class PostsController extends AppController {
     $this->Ticket = TableRegistry::get('Tickets');
     
     $posts = $this->Post->find()->all();
+    //print_r($posts);
     $tickets = $this->Ticket->find()->all();
     
     $this->set('posts', $posts);

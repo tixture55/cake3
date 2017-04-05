@@ -7,4 +7,5 @@ use Cake\Validation\Validator;
 
 class PostsTable extends Table {
 
+
 }
