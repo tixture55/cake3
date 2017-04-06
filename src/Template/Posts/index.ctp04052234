@@ -10,11 +10,11 @@ body {
 -->
 </style>
 <title>form</title>
-<?php echo $this->Html->script('jquery-1.10.1.min'); ?>">
+<script src="<?php echo $this->Html->script('/js/jquery-1.10.1.min.js'); ?>"></script>
 <link rel="stylesheet" href="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.css'); ?>">
 <script src="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
 
-<?php echo $this->Html->script('d957df7'); ?>
+<?php echo $this->Html->script('/js/957df7.js'); ?>
 
 <script>
 $(function() {
@@ -23,6 +23,7 @@ collapsible: true
 });
 		});
 </script>
+
 </head>
 <body>
 </p>
@@ -54,7 +55,7 @@ if($users){
 		echo '</td>';
 		echo '<td>';
 		?>
-		<a href="<?php echo $this->Url->build(['controller'=>'Tasks', 'action'=>'detail', 'taskId' => $this->value['id']]); ?>" class="something"><?php echo $this->value['work']; ?></a>
+		<a href="<?php echo $this->Url->build(['controller'=>'Tasks', 'action'=>'detail', 'taskId' => 77]); ?>" class="something"><?php echo $this->value['work']; ?></a>
 
 		<?php
                 echo '</td>';
