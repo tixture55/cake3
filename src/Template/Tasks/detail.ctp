@@ -41,7 +41,7 @@ if($posts){
 <table border="1">
 <tr>
 <td width="100">
-案件名
+<?php echo $titles[0]; ?>
 </td>
 <td width="200">
 <?php echo $work; ?>
@@ -49,16 +49,20 @@ if($posts){
 </tr>
 <tr>
 <td>
-総コミット数</td>
+<?php echo $titles[1]; ?>
+</td>
 <td>
 </td>
 </tr>
-<tr><td>
-クライアント名
+<tr>
+<td>
+<?php echo $titles[2]; ?>
 </td>
 </tr>
-<tr><td>
-重要度</td>
+<tr>
+<td>
+<?php echo $titles[3]; ?>
+</td>
 </tr>
 <?php
 

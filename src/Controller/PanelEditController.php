@@ -9,7 +9,7 @@ final class PanelEditController extends PanelController{
 	public function setTitle(int $task_id){
 
 	    if($task_id = 3){	
-	    	$this->title = array("総コミット数","クライアント名","重要度");
+	    	$this->title = array("案件名","総コミット数","クライアント名","重要度");
 	    }else{
 
 	    }

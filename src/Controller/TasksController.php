@@ -38,7 +38,7 @@ class TasksController extends AppController {
     $posts = $this->Post->find()->where(['Posts.id' => $task_id]);
     
     $this->set('posts', $posts);
-    $this->set('titles', $posts);
+    $this->set('titles', $titles);
   
   }
 }
