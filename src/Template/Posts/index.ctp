@@ -85,6 +85,9 @@ if($users){
 <table border="1">
 <tr>
 <td>
+ticket status
+</td>
+<td>
 担当者名
 </td>
 <td>
@@ -105,6 +108,9 @@ ticket有効期限
 if($tickets){
 	foreach ($tickets as $this->value) {
 		echo '<tr>';
+		echo '<td>';
+		echo $this->value['status'];
+		echo '</td>';
 		echo '<td>';
 		echo $this->value['target_name'];
 		echo '</td>';
@@ -131,6 +137,8 @@ echo '</div>';
 
 echo '</div>';
 echo '</p>';
+echo '</br>';
+echo '</br>';
 
 
 echo '<h3>新しいチケット作成</h3>';
