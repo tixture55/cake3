@@ -53,9 +53,13 @@ if($posts){
 <td>
 </td>
 </tr>
-<td>
+<tr><td>
 クライアント名
 </td>
+</tr>
+<tr><td>
+重要度</td>
+</tr>
 <?php
 
 		echo '</tr>';

@@ -29,12 +29,16 @@ class TasksController extends AppController {
     $task_id = strstr(Router::reverse($this->request) , "taskId=");    
     $task_id = str_replace("taskId=" , "" , $task_id);
 
+    $list = new PanelEditController();
+    $titles = $list->setTitle($task_id); 
+    
     $this->Post = TableRegistry::get('Posts');
     $this->Ticket = TableRegistry::get('Tickets');
     
     $posts = $this->Post->find()->where(['Posts.id' => $task_id]);
     
     $this->set('posts', $posts);
+    $this->set('titles', $posts);
   
   }
 }
