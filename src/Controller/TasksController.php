@@ -33,11 +33,13 @@ class TasksController extends AppController {
     $titles = $list->setTitle($task_id); 
     
     $this->Post = TableRegistry::get('Posts');
-    $this->Ticket = TableRegistry::get('Tickets');
+    $this->Task_detail = TableRegistry::get('Task_details');
     
     $posts = $this->Post->find()->where(['Posts.id' => $task_id]);
+    $task_details = $this->Task_detail->find()->where(['Task_details.task_id' => $task_id]);
     
     $this->set('posts', $posts);
+    $this->set('task_details', $task_details);
     $this->set('titles', $titles);
   
   }

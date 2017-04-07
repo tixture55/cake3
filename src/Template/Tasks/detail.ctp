@@ -33,7 +33,15 @@ $work = array();
 if($posts){
 	foreach ($posts as $this->value) {
             $work = $this->value['work'];
+        }
 }
+if($task_details){
+	foreach ($task_details as $this->value) {
+            $tag = $this->value['tag'];
+            $commit_num = $this->value['commit_num'];
+            $client_name = $this->value['client_name'];
+            $recent_ticket = $this->value['recent_ticket'];
+        }
 }
 ?> 
 
@@ -52,17 +60,21 @@ if($posts){
 <?php echo $titles[1]; ?>
 </td>
 <td>
-</td>
+<?php echo $commit_num; ?></td>
 </tr>
 <tr>
 <td>
 <?php echo $titles[2]; ?>
 </td>
+<td>
+<?php echo $client_name; ?></td>
 </tr>
 <tr>
 <td>
 <?php echo $titles[3]; ?>
 </td>
+<td>
+<?php echo $recent_ticket; ?></td>
 </tr>
 <?php
 
