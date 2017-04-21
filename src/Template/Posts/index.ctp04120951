@@ -1,4 +1,32 @@
-<?php echo $this->element('header'); ?>
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {
+	background-color: #CC99CC;
+}
+-->
+</style>
+<title>form</title>
+<?php echo $this->Html->script('jquery-1.10.1.min'); ?>">
+<link rel="stylesheet" href="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.css'); ?>">
+<script src="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
+
+<?php echo $this->Html->script('/js/d957df7'); ?>
+
+<script>
+$(function() {
+		$( "#accordion" ).accordion({
+collapsible: true
+});
+		});
+</script>
+</head>
+<body>
+</p>
+
 
 <table border="1">
 <tr>
@@ -18,17 +46,8 @@
 </tr>
 
 <?php
-$works = array();
-
-if($tasks){
-	foreach ($tasks as $this->value) {
-		array_push($works , $this->value['work']);
-	}
-}
-
 if($users){
 	foreach ($users as $this->value) {
-		
 		echo '<tr>';
 		echo '<td>';
 		echo $this->value['name'];
@@ -61,11 +80,9 @@ if($users){
 	echo '<br>';
 	echo '<br>';
 	echo '<div id="accordion">';
-	echo '<h3>直近のチケット</h3>';
-	echo '<br>';
+	echo '<h3>直近のISSUE</h3>';
 ?>
-<div class = "phui-header-header">
-<div id="table-container">
+
 <table border="1">
 <tr>
 <td>
@@ -93,8 +110,7 @@ if($tickets){
 	foreach ($tickets as $this->value) {
 		echo '<tr>';
 		echo '<td>';
-		echo '<span><span class="phui-tag-core ">';
-		echo $this->value['status'].'</span><span>';
+		echo $this->value['status'];
 		echo '</td>';
 		echo '<td>';
 		echo $this->value['target_name'];
@@ -102,7 +118,7 @@ if($tickets){
 		echo '<td>';
 		
 		?>
-                <a href="<?php echo $this->Url->build(['controller'=>'Tickets', 'action'=>'detail', 'ticket_id' => $this->value['id']]); ?>" class="something"><?php echo $this->value['title']; ?></a>
+                <a href="<?php echo $this->Url->build(['controller'=>'TicketDetails', 'action'=>'detail', 'ticket_id' => $this->value['id']]); ?>" class="something"><?php echo $this->value['title']; ?></a>
 		<?php 
                 echo '</td>';
 		echo '<td>';
@@ -111,15 +127,13 @@ if($tickets){
 		echo '<td>';
 		echo $this->value['last_update'];
 		echo '</td>';
-		echo '<td id="deadline">';
+		echo '<td>';
 		echo $this->value['deadline'];
 		echo '</td>';
 		echo '</tr>';
 		}
-	echo '</div>';
 	echo '</table>';
 }
-echo '</div>';
 
 echo '<table border="1">';
 	echo '<div>';
@@ -132,10 +146,11 @@ echo '</br>';
 
 
 $id = $this->request->data('hello.plice');
+echo $id;
 
 
 echo '<h3>新しいチケット作成</h3>';
-echo '<div id="main">';
+echo '<div>';
 echo $this->Form->create('hello', array('url' => '/posts','method' => 'post'));
  /*echo $this->Form->hidden(
                  'id' ,
@@ -146,19 +161,15 @@ echo $this->Form->create('hello', array('url' => '/posts','method' => 'post'));
                  array('value' => 0)
                  );
  echo $this->Form->input(
-                 'ticket_title',
+                 'hello.plice',
                  array('label' => 'チケットタイトル')
                  );
  echo $this->Form->input(
-                 'works',
-                 array('label' => '案件名','options' =>$works)
-                 );
- echo $this->Form->input(
-                 'detail',
+                 'hello.bank',
                  array('label' => '内容')
                  );
  echo $this->Form->input(
-                 'target_name',
+                 'hello.account',
                  array('label' => '担当者名')
                  );
 echo $this -> Form -> submit ( "チケット作成");
@@ -168,9 +179,6 @@ echo $this -> Form -> submit ( "チケット作成");
  echo '</div>';
 ?>
 </p>
-<br>
-<br>
-<br>
 </body>
 </html>
 

@@ -40,8 +40,16 @@ class PostsController extends AppController {
 			->limit(3);
  
     $users = $this->paginate($this->Post);
+    $tasks = $this->Post->find()
+		->select(['work']);
     $titles = $this->viewVars['titles'];
-    $this->set(compact("posts","users", "tickets","titles"));
+    $this->set(compact("posts","users", "tasks", "tickets","titles"));
+    
+    if($this->request->data('detail')){
+        $ins = new InsertController();
+        $ins->postTicket($this->request);     
+    
+    }
   
   }
 }

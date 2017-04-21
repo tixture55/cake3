@@ -22,6 +22,26 @@ final class InsertController {
 		$reply->last_update = date('Y/m/d H:i:s');
 		$this->Ticket_replies->save($reply);
 	}
+	
+        public function postTicket($req){
+
+		$this->Ticket = TableRegistry::get('Tickets');
+
+		$post = $this->Ticket->newEntity();
+		$post->details = $req->data('detail'); 
+		$post->title  = $req->data('ticket_title'); 
+		
+		if($req->data('status') == 0){
+			$post->status = "open";
+		}else{
+			$post->status ="close";
+		}
+
+		$post->target_name = $req->data('target_name');
+		$post->last_update = date('Y/m/d H:i:s');
+		$post->deadline = date('Y/m/d H:i:s');
+		$this->Ticket->save($post);
+	}
 
 
 

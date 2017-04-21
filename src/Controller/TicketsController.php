@@ -90,19 +90,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
         $ins = new InsertController();
         $ins->postTicketReply($this->request , $ticket_id);     
     
-        //requestデータをDBへ投入し、replyを画面に表示する処理
-	/*$reply = $this->Ticket_replies->newEntity();
-        $reply->details = $this->request->data('detail');
-        if($this->request->data('status') == 0){
-		$reply->status = "open";
-        }else{
-		$reply->status ="close";
-	}
-	
-        $reply->target_name = $this->request->data('target_name');
-        $reply->posts_id = $ticket_id;
-        $reply->last_update = date('Y/m/d H:i:s');
-	$this->Ticket_replies->save($reply);*/
     }
   
   }

@@ -5,11 +5,13 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class PostsTable extends Table {
+class CommitsTable extends Table {
+
 	public function initialize(array $config)
         {
-		$this->belongsTo('Tickets', [
-            		'foreignKey' => 'id'
+		$this->belongsTo('Posts', [
+            		'foreignKey' => 'posts_id'
         	]);
         }
+
 }

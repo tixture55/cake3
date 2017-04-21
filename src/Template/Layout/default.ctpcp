@@ -32,10 +32,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
-    <?php echo $this->Html->script('jquery-1.10.1.min'); ?>">
-  
-    <?php echo $this->Html->script('/js/d957df7'); ?>
-    <?php echo $this->Html->css('core.pkg', ['block' => false]); ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">

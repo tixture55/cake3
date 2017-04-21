@@ -1,33 +1,3 @@
-<html>
-<head>
-
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-<!--
-body {
-	background-color: #CC99CC;
-}
--->
-</style>
-<title>form</title>
-<script src="<?php echo $this->Html->script('/js/jquery-1.10.1.min.js'); ?>"></script>
-<link rel="stylesheet" href="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.css'); ?>">
-<script src="<?php echo $this->Html->url('/js/jquery-ui-1.11.4/jquery-ui.js'); ?>"></script>
-
-<?php echo $this->Html->script('/js/957df7.js'); ?>
-
-<script>
-$(function() {
-		$( "#accordion" ).accordion({
-collapsible: true
-});
-		});
-</script>
-
-</head>
-<body>
-</p>
-
 <?php
 $work = array();
 if($posts){
@@ -37,6 +7,7 @@ if($posts){
 }
 if($task_details){
 	foreach ($task_details as $this->value) {
+            $task_id = $this->value['task_id'];
             $tag = $this->value['tag'];
             $commit_num = $this->value['commit_num'];
             $client_name = $this->value['client_name'];
@@ -46,12 +17,12 @@ if($task_details){
 ?> 
 
 
-<table border="1">
+<table class="center-table" border="1">
 <tr>
-<td width="100">
+<td width="100" id="test">
 <?php echo $titles[0]; ?>
 </td>
-<td width="200">
+<td width="200" id="test">
 <?php echo $work; ?>
 </td>
 </tr>
@@ -74,7 +45,14 @@ if($task_details){
 <?php echo $titles[3]; ?>
 </td>
 <td>
-<?php echo $recent_ticket; ?></td>
+		<a href="<?php echo $this->Url->build(['controller'=>'Tickets', 'action'=>'detail', 'ticket_id' => $task_id]); ?>" class="something"><?php echo $recent_ticket; ?></a>
+</tr>
+<tr>
+<td>
+<?php echo $titles[4]; ?>
+</td>
+<td>
+<?php echo $tag; ?></td>
 </tr>
 <?php
 
@@ -82,7 +60,7 @@ if($task_details){
 
 	echo '</table>';
 
-echo '<h3>新しいチケット作成</h3>';
+echo '<div class="ticket-title"><h3>新しいチケット作成</h3></div>';
 echo '<div>';
 echo $this->Form->create('hello', array('url' => 'add','method' => 'post'));
  /*echo $this->Form->hidden(
