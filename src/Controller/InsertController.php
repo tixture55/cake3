@@ -29,6 +29,17 @@ final class InsertController {
 
 		$post = $this->Ticket->newEntity();
 		$post->details = $req->data('detail'); 
+    		$tickets = $this->Ticket->find()
+			->select(['task_id','details'])
+			->where(['Tickets.details' => $post->details]);
+
+		if($tickets){
+			foreach ($tickets as $this->value) {
+				$task_id = $this->value['task_id'];
+				$details = $this->value['details'];
+			}
+		}
+		
 		$post->title  = $req->data('ticket_title'); 
 		
 		if($req->data('status') == 0){
@@ -40,7 +51,7 @@ final class InsertController {
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
-		$this->Ticket->save($post);
+		if(!isset($details) && isset($task_id) ) $this->Ticket->save($post);
 	}
 
 
