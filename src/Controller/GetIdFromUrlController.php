@@ -1,13 +1,19 @@
 <?php
 namespace App\Controller;
 
-final class PanelEditController extends PanelController{
 
-	protected $title;
+final class GetIdFromUrlController extends GetIdController{
+
+	protected $ticket_id;
 
         //画面によって、セットするタイトルを変える
-	public function setTitle(String $view){
-            
+	public function getTicketId(String $url){
+           $ticket_id = strstr($url , "ticket_id=");
+           $ticket_id = str_replace("ticket_id=" , "" , $ticket_id);
+	   
+
+           $this->ticket_id = $ticket_id;
+           /* 
 	    if(strcmp($view , "tasks" ) === 0){	
 	    	$this->title = array("案件名","総コミット数","クライアント名","直近のチケット","タグ");
 	    }elseif(strcmp($view , "tickets") === 0){
@@ -18,11 +24,10 @@ final class PanelEditController extends PanelController{
 	    }else{
 
 	    }
- 		return $this->title;
+ 		return $this->ticket_id;
+	   */
+		return $this->ticket_id;
 	}
 	
-	public function addCommitHistory(){
-
-	}
 
 }

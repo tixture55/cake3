@@ -13,9 +13,12 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
-
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Routing\Router;
+use Cake\Routing\Route\DashedRoute;
+
+
 
 /**
  * Application Controller
@@ -37,23 +40,23 @@ class AppController extends Controller
      *
      * @return void
      */
+
+
     public function initialize()
     {
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        /*$this->loadComponent('Auth', [
-	        'authorize' => ['Controller'],
-                'loginRedirect' => [
-                    'controller' => 'Auths',
-                    'action' => 'index'
-                ],
-                'logoutRedirect' => [
-                    'controller' => 'Auths',
-                    'action' => 'login'
-                ]
-        ]);*/
+
+        $title_arr = array();
+
+	//$this->getTraceAsString();
+
+
+        $this->set('titles', $this->_getTitle());
+        
+
     
     }
      public function isAuthorized($user) /* add */
@@ -74,5 +77,16 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+    
+    private function _getTitle(){
+        $view = strstr(Router::reverse($this->request) , "cake3/");               $view = str_replace("cake3/" , "" , $view);
+        if(strpos($view , "/" , 0)) $view = strstr($view,"/", TRUE);
+        if(strpos($view , "?" , 0)) $view = strstr($view,"?", TRUE);
+      
+        $list = new PanelEditController(); 
+	$titles = $list->setTitle($view); 
+        if(isset($title) && isset($view)) array_push($titles,$view);
+        return $titles; 
     }
 }

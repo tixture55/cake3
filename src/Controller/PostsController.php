@@ -3,6 +3,8 @@
 //CakePHP3のPostsController.php
 namespace App\Controller;
 use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
+use Cake\Routing\Route\DashedRoute;
 
 class PostsController extends AppController {
  
@@ -12,11 +14,14 @@ class PostsController extends AppController {
     ];
  
   public $paginate = [
-        'limit' => 2,
+	'contain' => ['Tickets'],
+        'limit' => 4,
         'order' => [
-            'Posts.name' => 'desc'
+            'Posts.name' => 'desc',
+	    'Tickets.id' => 'asc'
         ]
     ];
+  
 
   public function initialize()
     {
@@ -25,17 +30,18 @@ class PostsController extends AppController {
     }
   
   public function index() {
-  
+ 
     $this->Post = TableRegistry::get('Posts');
     $this->Ticket = TableRegistry::get('Tickets');
-    
+
     $posts = $this->Post->find()->all();
-    $tickets = $this->Ticket->find()->all();
-    
-    $this->set('posts', $posts);
+    $tickets = $this->Ticket->find()
+			->order(['last_update' => 'DESC'])
+			->limit(3);
+ 
     $users = $this->paginate($this->Post);
-    $this->set('users', $users);
-    $this->set('tickets', $tickets);
+    $titles = $this->viewVars['titles'];
+    $this->set(compact("posts","users", "tickets","titles"));
   
   }
 }

@@ -1,4 +1,9 @@
 <?php
 namespace App\Controller;
 
-abstract class PanelController {}
+abstract class PanelController {
+
+	public function setTitle(String $view){}
+
+}
+

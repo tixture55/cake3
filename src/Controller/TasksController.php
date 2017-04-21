@@ -23,23 +23,20 @@ class TasksController extends AppController {
   
   public function detail() {
  
-    //詳細を知りたい案件のtaskIdの取得 
-    //echo Router::reverse($this->request);   
-    
-    $task_id = strstr(Router::reverse($this->request) , "taskId=");    
-    $task_id = str_replace("taskId=" , "" , $task_id);
-
-    $list = new PanelEditController();
-    $titles = $list->setTitle($task_id); 
     
     $this->Post = TableRegistry::get('Posts');
     $this->Task_detail = TableRegistry::get('Task_details');
     
+    //詳細を知りたい案件のtaskIdの取得 
+    $task_id = strstr(Router::reverse($this->request) , "taskId=");           $task_id = str_replace("taskId=" , "" , $task_id);
+       
     $posts = $this->Post->find()->where(['Posts.id' => $task_id]);
     $task_details = $this->Task_detail->find()->where(['Task_details.task_id' => $task_id]);
     
     $this->set('posts', $posts);
     $this->set('task_details', $task_details);
+    
+    $titles = $this->viewVars['titles'];
     $this->set('titles', $titles);
   
   }
