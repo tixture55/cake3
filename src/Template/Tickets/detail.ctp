@@ -89,13 +89,20 @@ if($tickets){
 </a>
 	</div>
 <div class="phui-box phui-box-border phui-object-box mlt mll mlr phui-box-blue-property "><div class="phui-header-shell "><h1 class="phui-header-view"><div class="phui-header-row"><div class="phui-header-col2"><span class="phui-header-header">Details</span></div><div class="phui-header-col3"></div></div></h1></div><div class="phui-property-list-section"><div class="phui-property-list-container grouped"><div class="phui-property-list-properties-wrap "><dl class="phui-property-list-properties"><dt class="phui-property-list-key">Commits #総コミット数：<?php echo $commit_num; ?> </dt><dd class="phui-property-list-value"><a href="/D12052">
-<?php if($commits){
+<?php /*if($commits){
 	foreach ($commits as $this->value) {
              echo '　';
 	     echo $this->value['title'];
 	     echo '<br>';
         }
-}
+}*/
+if($commit_arr){
+          foreach ($commit_arr as $this->value) {
+               echo '　';
+               echo $this->value;
+               echo '<br>';
+          }
+ }
 ?>
 </a>
 </div>

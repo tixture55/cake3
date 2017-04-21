@@ -13,7 +13,6 @@ class TicketsController extends AppController {
         'Paginator' => ['templates' => 'paginator-templates']
     ];
  
-
   public function initialize()
     {
         parent::initialize();
@@ -72,19 +71,17 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     //$output = shell_exec("git log | cut -d \" \" -f 6-8");
     //$commit_id = shell_exec("git log --oneline | cut -d ' ' -f 1 | sed -n -e 1p");
     //$commit_id = array();
-    //$commit_id = shell_exec("git log --oneline | sed -n -e 1p | wc -l");
-    $commit_num = shell_exec("git log --oneline | wc -l");
-    //$commit_id[] = shell_exec("git log --oneline | while read line do \$line done");
-    //$commit_id = shell_exec("git log --oneline | cut -d: -f1");
-    $this->set('commit_num', $commit_num);
+    //$commit_arr = array();
 
-    /*$test ="Fukuda Hata Sueyasu";
-    $i = shell_exec("\"Fukuda Hata Sueyasu\" | cut -d \" \" -f 6-8");
-    echo $i;
-*/
+    $commit = new GetCommitController();
+    $commit_arr = $commit->getCommit(1,3);    
+    $commit_num = $commit->getCommitNumber();
+    
+    $this->set('commit_num', $commit_num);
 
     $titles = $this->viewVars['titles'];
     $this->set('titles', $titles);
+    $this->set('commit_arr', $commit_arr);
     
     if($this->request->data('detail')){
         $ins = new InsertController();

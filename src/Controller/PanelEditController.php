@@ -6,6 +6,8 @@ final class PanelEditController extends PanelController{
 	protected $title;
 
         //画面によって、セットするタイトルを変える
+	
+
 	public function setTitle(String $view){
             
 	    if(strcmp($view , "tasks" ) === 0){	
