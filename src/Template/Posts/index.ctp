@@ -161,8 +161,11 @@ echo $this->Form->create('hello', array('url' => '/posts','method' => 'post'));
                  'target_name',
                  array('label' => '担当者名')
                  );
-echo $this -> Form -> submit ( "チケット作成");
+//echo $this -> Form -> submit ("チケット作成"); 
  //echo $this->Form->end();
+echo $this->Form->submit(__(' チケット作成 ',true),array(
+    'name' => 'send',
+));
  echo '<p>';
  echo '</ul>';
  echo '</div>';
