@@ -68,16 +68,16 @@ if($users){
 <div id="table-container">
 <table border="1">
 <tr>
-<td>
+<td width="80">
 ticket status
 </td>
-<td>
+<td width="100">
 担当者名
 </td>
 <td>
 ticketタイトル
 </td>
-<td>
+<td width="300">
 ticket内容
 </td>
 <td>

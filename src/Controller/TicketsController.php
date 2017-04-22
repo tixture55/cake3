@@ -68,10 +68,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $this->set('ticket_replies', $ticket_replies);
     $this->set('commits', $commits);
     
-    //$output = shell_exec("git log | cut -d \" \" -f 6-8");
-    //$commit_id = shell_exec("git log --oneline | cut -d ' ' -f 1 | sed -n -e 1p");
-    //$commit_id = array();
-    //$commit_arr = array();
 
     $commit = new GetCommitController();
     $commit_arr = $commit->getCommit(1,3);    
