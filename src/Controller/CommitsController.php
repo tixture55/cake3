@@ -68,7 +68,22 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commit = new GetCommitController();
     $commit_arr = $commit->getCommit(1,3);    
     $commit_num = $commit->getCommitNumber();
-    $commit_file_diff = $commit->getCommitFileDiff();   
+
+$commit_id_arr = array();
+$commit_detail_arr = array();
+    
+if($commit_arr){
+          foreach ($commit_arr as $this->value) {
+               $pieces = explode(" ", $this->value);
+	       $commit_detail = str_replace($pieces[0] , "" , $this->value);
+	       array_push($commit_id_arr , $pieces[0]);
+	       array_push($commit_detail_arr , $commit_detail);
+          }
+ }
+    
+    $commit_file_diff = $commit->getCommitFileDiff($commit_id_arr[0] , $commit_id_arr[1]);   
+
+    echo $commit_file_diff;
  
     $this->set('commit_num', $commit_num);
 
