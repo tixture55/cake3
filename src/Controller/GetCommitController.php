@@ -23,9 +23,10 @@ final class GetCommitController {
 		$branch = shell_exec("git branch");
                 $b_arr = explode(" ",$branch);
 
-                $bool = in_array('master' , $b_arr);
-                if($bool){
-			 return 'master';		
+                $key = array_search('master' , $b_arr);
+                if(isset($key)){
+			$branch = "master"; 
+			return $branch;		
 		}else{
 			$key = array_search('*' , $b_arr);
 			
