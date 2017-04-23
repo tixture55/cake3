@@ -70,7 +70,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commit_num = $commit->getCommitNumber();
 
     $branch = $commit->getBranch();
-    echo $branch;
 
 $commit_id_arr = array();
 $commit_detail_arr = array();
@@ -105,6 +104,7 @@ if($commit_file_diff){
 }
          
    
+    $this->set('branch', $branch);
     $this->set('diff_files', $diff_filter_arr);
     $this->set('commit_num', $commit_num);
 

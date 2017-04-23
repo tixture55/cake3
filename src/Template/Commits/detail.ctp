@@ -43,7 +43,7 @@ if($commits){
 </td>
 <td>
 <span><span class="phui-tag-core ">
-<?php echo 'master</span><span>'; ?></td>
+<?php echo $branch.'</span><span>'; ?></td>
 </tr>
 <tr>
 <td>

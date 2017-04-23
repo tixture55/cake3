@@ -21,9 +21,16 @@ final class GetCommitController {
 	public function getBranch(){
 
 		$branch = shell_exec("git branch");
+                $b_arr = explode(" ",$branch);
 
-		return $branch;		
-
+                $bool = in_array('master' , $b_arr);
+                if($bool){
+			 return 'master';		
+		}else{
+			$key = array_search('*' , $b_arr);
+			
+			return $b_arr[$key + 1];
+		}
 	}
 
 	public function getCommitNumber(){
