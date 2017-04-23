@@ -8,6 +8,7 @@ $(function() {
 
 
 		$('.phui-header-header span:first-child').addClass('phui-tag-view phui-tag-type-shade phui-tag-shade phui-tag-shade-indigo phui-tag-icon-view');
+		$('.phui-property-list-section span').addClass('phui-tag-view phui-tag-type-shade phui-tag-shade phui-tag-shade-indigo phui-tag-icon-view');
 		$('#menu').toggleClass('listitem');
 		$('table td').each(function(){
 				if($(this).text().indexOf('close') != -1){

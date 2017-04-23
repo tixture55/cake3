@@ -96,11 +96,17 @@ if($tickets){
 	     echo '<br>';
         }
 }*/
+
+$pieces = array();
+
 if($commit_arr){
           foreach ($commit_arr as $this->value) {
                echo '　';
-               echo $this->value;
-               echo '<br>';
+               $pieces = explode(" ", $this->value);
+               echo '<span><span class="phui-tag-core ">'.$pieces[0].'</span></span>';
+	       $commit_detail = str_replace($pieces[0] , "" , $this->value);
+	       echo ' '.$commit_detail;
+	       echo '<br>';
           }
  }
 ?>
