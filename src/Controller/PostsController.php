@@ -45,7 +45,7 @@ class PostsController extends AppController {
     $titles = $this->viewVars['titles'];
     $this->set(compact("posts","users", "tasks", "tickets","titles"));
     
-    if($_POST['send'] && $this->request->data('detail')){
+    if(isset($_POST['send']) && $this->request->data('detail')){
         $ins = new InsertController();
         $ins->postTicket($this->request);     
     

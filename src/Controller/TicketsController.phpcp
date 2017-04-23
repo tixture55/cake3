@@ -8,7 +8,6 @@ use Cake\Routing\Route\DashedRoute;
 
 class TicketsController extends AppController {
  
-  private $id;
 
   public $helpers = [
         'Paginator' => ['templates' => 'paginator-templates']
@@ -19,11 +18,9 @@ class TicketsController extends AppController {
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
-	//$this->loadComponent('Security');
+        //$this->loadComponent('Security');
         //$this->Security->requireSecure();
     }
-  
-
   public function detail() {
  
 
