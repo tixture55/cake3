@@ -9,8 +9,6 @@ use Cake\Network\Exception\NotFoundException;
 
 class CommitsController extends AppController {
  
-  private $id;
-
   public $helpers = [
         'Paginator' => ['templates' => 'paginator-templates']
     ];
@@ -31,6 +29,7 @@ class CommitsController extends AppController {
     $id = new GetIdFromUrlController;
     $commit_id = $id->getTicketId(Router::reverse($this->request));    
  
+
     $this->Post = TableRegistry::get('Posts');
     $this->Ticket = TableRegistry::get('Tickets');
     $this->Ticket_replies = TableRegistry::get('Ticket_replies');
@@ -62,6 +61,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $this->set('tickets', $tickets);
     $this->set('ticket_replies', $ticket_replies);
     $this->set('commits', $commits);
+    $this->set('commit_id', $commit_id);
     
 
     $commit = new GetCommitController();

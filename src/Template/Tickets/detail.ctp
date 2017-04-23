@@ -76,7 +76,6 @@ if($tickets){
 		<div class="phui-property-list-section"><div class="phui-property-list-container grouped">
 			<div class="phui-property-list-properties-wrap "><dl class="phui-property-list-properties">
 				<dt class="phui-property-list-key">
-					<?php //if(isset($ticket_reply_detail)) echo $ticket_reply_detail; ?>
 					<?php 
 	foreach ($ticket_replies as $this->value) {
              echo $this->value['details'];
@@ -98,7 +97,7 @@ if($commit_arr){
                echo '　';
                $pieces = explode(" ", $this->value);
 	       ?>
-	       <a href="<?php echo $this->Url->build(['controller'=>'Commits','action'=>'detail','commitId' => $pieces[0]]); ?>" class="something">
+	       <a href="<?php echo $this->Url->build(['controller'=>'Commits','action'=>'detail','ticket_id' => $ticket_id, 'commit_id' => $pieces[0]]); ?>" class="something">
                <?php echo '<span><span class="phui-tag-core ">'.$pieces[0].'</span></span>';
 	       $commit_detail = str_replace($pieces[0] , "" , $this->value);
 	       echo ' '.$commit_detail;

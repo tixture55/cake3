@@ -9,8 +9,6 @@ use Cake\Network\Exception\NotFoundException;
 
 class TicketsController extends AppController {
  
-  private $id;
-
   public $helpers = [
         'Paginator' => ['templates' => 'paginator-templates']
     ];

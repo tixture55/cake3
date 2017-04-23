@@ -6,17 +6,6 @@ if($posts){
             $work = $this->value['work'];
         }
 }
-/*if($tickets){
-	foreach ($tickets as $this->value) {
-            $ticket_id = $this->value['id'];
-            $ticket_name = $this->value['title'];
-            $status = $this->value['status'];
-            $ticket_detail = $this->value['details'];
-            $last_update = $this->value['last_update'];
-        }
-
-
-}*/
 if($commits){
 	foreach ($commits as $this->value) {
             $commit_id = $this->value['id'];

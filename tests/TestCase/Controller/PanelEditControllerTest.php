@@ -20,26 +20,36 @@ class PanelEditControllerTest extends IntegrationTestCase
     	$test = new PanelEditController();
 	
 	$arr = array();
-	array_push($arr , "tasks");
+	/*array_push($arr , "tasks");
 	array_push($arr , "tickets");
 	array_push($arr , "posts");
 	array_push($arr , "commits");
-	
+	*/
 	$tasks = ['案件名', '総コミット数', 'クライアント名', '直近のチケット','タグ'];	
 	$tickets = ['チケット名', 'status', '案件名', 'チケット内容','最終更新日時'];	
+
+	$arr = ['tasks' => $tasks , 'tickets' => $tickets];
 
 	$key = array();
 	array_push($key , "案件名");	
 	
-	foreach($key as $key_val){
+	foreach($arr as $key => $arr_num){
+	        if($key === "tickets"){
+			$this->assertContains('チケット名' , $test->setTitle($key));
+			$this->assertContains('status' , $test->setTitle($key));
+			$this->assertContains('案件名' , $test->setTitle($key));
+			$this->assertContains('チケット内容' , $test->setTitle($key));
+			$this->assertContains('最終更新日時' , $test->setTitle($key));
+		}elseif($key === "tasks"){
+			$this->assertContains('案件名' , $test->setTitle($key));
+			$this->assertContains('総コミット数' , $test->setTitle($key));
+			$this->assertContains('クライアント名' , $test->setTitle($key));
+			$this->assertContains('直近のチケット' , $test->setTitle($key));
+			$this->assertContains('タグ' , $test->setTitle($key));
 
-		foreach($arr as $val){
-			if($val === "tickets") $this->assertContains($key_val , $test->setTitle($val));
-			if($val === "posts") $this->assertContains($key_val , $test->setTitle($val));
 		}
 	}
     }
-
     /**
      * Test addCommitHistory method
      *
