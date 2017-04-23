@@ -19,6 +19,9 @@ class GetCommitControllerTest extends IntegrationTestCase
     {
     	$test = new GetCommitController();
 	$this->assertCount(3, $test->getCommit(1 , 3));
+        $this->assertArrayHasKey(0, $test->getCommit(1 , 3));
+        $this->assertArrayHasKey(1, $test->getCommit(1 , 3));
+        $this->assertArrayHasKey(2, $test->getCommit(1 , 3));
     }
 
     /**
@@ -26,9 +29,10 @@ class GetCommitControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    /*
+    
     public function testGetCommitNumber()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }*/
+    	$test = new GetCommitController();
+	$this->assertInternalType("int", $test->getCommitNumber());
+    }
 }

@@ -36,7 +36,7 @@ final class GetCommitController {
 
 	public function getCommitNumber(){
 
-		$commit_num = shell_exec("git log --oneline | wc -l");
+		$commit_num = intval(shell_exec("git log --oneline | wc -l"));
 
 		return $commit_num;		
 
