@@ -1,7 +1,6 @@
 <?php 
 
 $work = array();
-
 if($posts){
 	foreach ($posts as $this->value) {
             $work = $this->value['work'];
