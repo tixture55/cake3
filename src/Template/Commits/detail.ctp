@@ -6,10 +6,16 @@ if($posts){
             $work = $this->value['work'];
         }
 }
+if($tickets){
+	foreach ($tickets as $this->value) {
+            $ticket_name = $this->value['title'];
+            $target_name = $this->value['target_name'];
+        }
+}
 if($commits){
 	foreach ($commits as $this->value) {
             $commit_id = $this->value['id'];
-            $ticket_name = $this->value['title'];
+            $commit_name = $this->value['title'];
             $status = $this->value['status'];
             $ticket_detail = $this->value['details'];
             $last_update = $this->value['last_update'];
@@ -28,7 +34,7 @@ if($commits){
 <?php echo $titles[0]; ?>
 </td>
 <td width="200">
-<?php echo $commit_id; ?>
+<?php echo $c_id; ?>
 </td>
 </tr>
 <tr>
@@ -37,7 +43,7 @@ if($commits){
 </td>
 <td>
 <span><span class="phui-tag-core ">
-<?php echo $status.'</span><span>'; ?></td>
+<?php echo 'master</span><span>'; ?></td>
 </tr>
 <tr>
 <td>
@@ -58,6 +64,27 @@ if($commits){
 <?php echo $titles[4]; ?>
 </td>
 <td>
+<?php echo $modify_file; ?></td>
+</tr>
+<tr>
+<td>
+<?php echo $titles[5]; ?>
+</td>
+<td>
+<?php echo $ticket_name; ?></td>
+</tr>
+<tr>
+<td>
+<?php echo $titles[6]; ?>
+</td>
+<td>
+<?php echo $commit_name; ?></td>
+</tr>
+<tr>
+<td>
+<?php echo $titles[7]; ?>
+</td>
+<td>
 <?php echo $last_update; ?></td>
 </tr>
 <?php
@@ -69,13 +96,12 @@ if($commits){
 ?>
 </p>
 </div>
-<div class="phui-box phui-box-border phui-object-box mlt mll mlr phui-box-blue-property "><div class="phui-header-shell "><h1 class="phui-header-view"><div class="phui-header-row"><div class="phui-header-col2"><span class="phui-header-header">チケットへの返信</span></div>
+<div class="phui-box phui-box-border phui-object-box mlt mll mlr phui-box-blue-property "><div class="phui-header-shell "><h1 class="phui-header-view"><div class="phui-header-row"><div class="phui-header-col2"><span class="phui-header-header">コミットへの返信</span></div>
 
 	<div class="phui-header-col3"></div></div></h1></div>
 		<div class="phui-property-list-section"><div class="phui-property-list-container grouped">
 			<div class="phui-property-list-properties-wrap "><dl class="phui-property-list-properties">
 				<dt class="phui-property-list-key">
-					<?php //if(isset($ticket_reply_detail)) echo $ticket_reply_detail; ?>
 					<?php 
 	foreach ($ticket_replies as $this->value) {
              echo $this->value['details'];

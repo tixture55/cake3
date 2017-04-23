@@ -27,8 +27,9 @@ class CommitsController extends AppController {
  
 
     $id = new GetIdFromUrlController;
-    $commit_id = $id->getTicketId(Router::reverse($this->request));    
- 
+    $ticket_id = $id->getTicketId(Router::reverse($this->request));    
+    $c_id = $id->getCommitId(Router::reverse($this->request));    
+    
 
     $this->Post = TableRegistry::get('Posts');
     $this->Ticket = TableRegistry::get('Tickets');
@@ -61,7 +62,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $this->set('tickets', $tickets);
     $this->set('ticket_replies', $ticket_replies);
     $this->set('commits', $commits);
-    $this->set('commit_id', $commit_id);
+    $this->set('c_id', $c_id);
     
 
     $commit = new GetCommitController();
