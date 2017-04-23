@@ -28,8 +28,9 @@ class PanelEditControllerTest extends IntegrationTestCase
 	$tasks = ['案件名', '総コミット数', 'クライアント名', '直近のチケット','タグ'];	
 	$tickets = ['チケット名', 'status', '案件名', 'チケット内容','最終更新日時'];	
 
+	$key = array();
+	array_push($key , "案件名");	
 	
-	$key = "案件名";	
 	foreach($key as $key_val){
 
 		foreach($arr as $val){
