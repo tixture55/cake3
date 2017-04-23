@@ -18,6 +18,14 @@ final class GetCommitController {
 		return $commit_arr;
 	}
 	
+	public function getBranch(){
+
+		$branch = shell_exec("git branch");
+
+		return $branch;		
+
+	}
+
 	public function getCommitNumber(){
 
 		$commit_num = shell_exec("git log --oneline | wc -l");

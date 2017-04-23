@@ -69,6 +69,9 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commit_arr = $commit->getCommit(1,3);    
     $commit_num = $commit->getCommitNumber();
 
+    $branch = $commit->getBranch();
+    echo $branch;
+
 $commit_id_arr = array();
 $commit_detail_arr = array();
     
@@ -83,7 +86,7 @@ if($commit_arr){
     
     $commit_file_diff = $commit->getCommitFileDiff($commit_id_arr[0] , $commit_id_arr[1]);   
 
-echo $commit_file_diff;
+//echo $commit_file_diff;
 if($commit_file_diff){
 	
 	$regex = "/\//";
