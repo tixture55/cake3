@@ -7,9 +7,20 @@ if($posts){
             $work = $this->value['work'];
         }
 }
-if($tickets){
+/*if($tickets){
 	foreach ($tickets as $this->value) {
             $ticket_id = $this->value['id'];
+            $ticket_name = $this->value['title'];
+            $status = $this->value['status'];
+            $ticket_detail = $this->value['details'];
+            $last_update = $this->value['last_update'];
+        }
+
+
+}*/
+if($commits){
+	foreach ($commits as $this->value) {
+            $commit_id = $this->value['id'];
             $ticket_name = $this->value['title'];
             $status = $this->value['status'];
             $ticket_detail = $this->value['details'];
@@ -29,7 +40,7 @@ if($tickets){
 <?php echo $titles[0]; ?>
 </td>
 <td width="200">
-<?php echo $ticket_name; ?>
+<?php echo $commit_id; ?>
 </td>
 </tr>
 <tr>

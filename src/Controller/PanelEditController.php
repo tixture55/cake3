@@ -17,6 +17,8 @@ final class PanelEditController extends PanelController{
 
 	    }elseif(strcmp($view , "posts") === 0){
 	    	$this->title = array("担当者名","案件名","関連チケット数","最終更新日時");
+	    }elseif(strcmp($view , "commits") === 0){
+	    	$this->title = array("commit_id","チケット名","担当者名","案件名","ブランチ","最終更新日時");
 	    }else{
 
 	    }

@@ -23,6 +23,7 @@ class PanelEditControllerTest extends IntegrationTestCase
 	array_push($arr , "tasks");
 	array_push($arr , "tickets");
 	array_push($arr , "posts");
+	array_push($arr , "commits");
 	
 	$key = array();	
 	array_push($key , "案件名");
