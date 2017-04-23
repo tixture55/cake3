@@ -5,6 +5,7 @@ namespace App\Controller;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
+use Cake\Network\Exception\NotFoundException;
 
 class TicketsController extends AppController {
  
@@ -40,14 +41,16 @@ class TicketsController extends AppController {
     $tickets = $this->Ticket->find()
 	//->select(['id','posts_id', 'status', 'details', 'target_name','last_update'])
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
-
     
-if($tickets){
+    
+    if($tickets){
 	foreach ($tickets as $this->value) {
             $posts_id = $this->value['posts_id'];
             $ticket_id = $this->value['id'];
         }
-}
+    }elseif(empty($tickets)){
+        throw new NotFoundException(__('チケットが見つかりません。'));
+    }
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
    

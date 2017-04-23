@@ -29,9 +29,16 @@ class GetIdFromUrlControllerTest extends IntegrationTestCase
 
     public function provideAdditionTestParams()
     {
-    	return [
+    	$patterns = array();
+	/*for($i = 1; $i < 10000; $i++){
+		$patterns[$i] = ["/cake3/tickets/detail?ticket_id=".$i, $i];  
+	}
+	return $patterns;*/
+	return [
         	["/cake3/tickets/detail?ticket_id=5", 5],
-        	["/cake3/tickets/detail?ticket_id=6", 6],
+        	["/cake3/tickets/detail?ticket_id=15", 15],
+        	["/cake3/tickets/detail?ticket_id=155", 155],
+        	["/cake3/tickets/detail?ticket_id=1555", 1555],
     	];
     }
 }
