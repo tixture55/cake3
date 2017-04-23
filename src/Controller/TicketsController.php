@@ -66,7 +66,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     
 
     $commit = new GetCommitController();
-    $commit_arr = $commit->getCommit(1,3);    
+    $commit_arr = $commit->getCommit(1,23);    
     $commit_num = $commit->getCommitNumber();
     
     $this->set('commit_num', $commit_num);

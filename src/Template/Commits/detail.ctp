@@ -79,7 +79,7 @@ if($commits){
 </td>
 <td>
 <?php 
-print_r($commit_arr);
+//print_r($commit_arr);
 if($commit_arr){
           foreach ($commit_arr as $this->value) {
 	       		$pieces = explode(" ", $this->value);
