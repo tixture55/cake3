@@ -68,7 +68,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commit = new GetCommitController();
     $commit_arr = $commit->getCommit(1,3);    
     $commit_num = $commit->getCommitNumber();
-    
+    $commit_file_diff = $commit->getCommitFileDiff();   
+ 
     $this->set('commit_num', $commit_num);
 
     $titles = $this->viewVars['titles'];

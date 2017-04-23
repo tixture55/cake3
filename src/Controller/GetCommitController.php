@@ -25,5 +25,12 @@ final class GetCommitController {
 		return $commit_num;		
 
 	}
+	public function getCommitFileDiff(){
+
+		$file_diff = shell_exec("git diff --stat ".$commit_id." ".$commit_id2);
+
+		return $file_diff;		
+
+	}
 
 }

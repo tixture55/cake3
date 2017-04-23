@@ -71,18 +71,22 @@ if($commits){
 <?php echo $titles[5]; ?>
 </td>
 <td>
-<?php echo $ticket_name; ?></td>
+<?php 
+if($commit_arr){
+          foreach ($commit_arr as $this->value) {
+               $pieces = explode(" ", $this->value);
+	       $commit_detail = str_replace($pieces[0] , "" , $this->value);
+          }
+ }
+
+
+
+
+echo $commit_detail; ?></td>
 </tr>
 <tr>
 <td>
 <?php echo $titles[6]; ?>
-</td>
-<td>
-<?php echo $commit_name; ?></td>
-</tr>
-<tr>
-<td>
-<?php echo $titles[7]; ?>
 </td>
 <td>
 <?php echo $last_update; ?></td>
@@ -118,7 +122,7 @@ if($commits){
 
 $pieces = array();
 
-if($commit_arr){
+/*if($commit_arr){
           foreach ($commit_arr as $this->value) {
                echo '　';
                $pieces = explode(" ", $this->value);
@@ -129,7 +133,7 @@ if($commit_arr){
 	       echo ' '.$commit_detail;
 	       echo '<br>';
           }
- }
+ }*/
 ?>
 </a>
 </div>
