@@ -64,7 +64,13 @@ if($commits){
 <?php echo $titles[4]; ?>
 </td>
 <td>
-<?php echo $modify_file; ?></td>
+<?php
+	
+    foreach($diff_files as $diff_file_val){
+	 echo $diff_file_val;
+	 echo '<br>';
+    }
+ ?></td>
 </tr>
 <tr>
 <td>

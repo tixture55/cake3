@@ -83,8 +83,26 @@ if($commit_arr){
     
     $commit_file_diff = $commit->getCommitFileDiff($commit_id_arr[0] , $commit_id_arr[1]);   
 
-    echo $commit_file_diff;
- 
+echo $commit_file_diff;
+if($commit_file_diff){
+	
+	$regex = "/\//";
+	$diff_filter_arr = array();
+	$diff_sep_arr = explode(" " , $commit_file_diff);
+	$diff_filter_arr = array_filter($diff_sep_arr, function($value) use($regex) {
+    		return preg_match($regex, $value);
+	});
+	
+        //swapファイルの除外
+        $regex = "/sw/";
+        $drop_filter_arr = array_filter($diff_filter_arr, function($value) use($regex) {
+    		return preg_match($regex, $value);
+	});
+        $diff_filter_arr = array_diff_assoc($diff_filter_arr , $drop_filter_arr);
+}
+         
+   
+    $this->set('diff_files', $diff_filter_arr);
     $this->set('commit_num', $commit_num);
 
     $titles = $this->viewVars['titles'];
