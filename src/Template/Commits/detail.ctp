@@ -80,14 +80,14 @@ if($commits){
 </td>
 <td>
 <?php 
-if($commit_arr){
+/*if($commit_arr){
           foreach ($commit_arr as $this->value) {
 	       		$pieces = explode(" ", $this->value);
 	       		$commit_detail = str_replace($pieces[0] , "" , $this->value);
                		break;
 	  }
  }
-
+*/
 
 echo $commit_detail;
 ?>
@@ -117,7 +117,8 @@ echo $commit_detail;
 				<dt class="phui-property-list-key">
 					<?php 
 	foreach ($ticket_replies as $this->value) {
-             echo $this->value['details'];
+             //echo $this->value['details'];
+	     echo '未実装';
 	     echo '<br>';
 	     echo '<hr>';
         }

@@ -10,7 +10,9 @@ a:hover {
 a {
     color: #1798A5;
 }
-
+.phui-property-list-key{
+    font-size: 12px;
+}
 .side-nav li a:not(.button) {
     color: #15848F;
 }

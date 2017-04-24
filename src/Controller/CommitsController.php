@@ -71,6 +71,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
     $branch = $commit->getBranch();
 
+
     if(isset($commit_arr) || isset($commit_num) || isset($branch)){
     	$this->set('commit_arr', $commit_arr);
         $this->set('commit_num', $commit_num);
@@ -85,17 +86,21 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     		return preg_match($regex, $value);
 	});
     $c_id_key = key($c_id_arr);
-    $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
-    $commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+    //配列の最後にきた場合の処理が必要
 
 
-    /*$commit_file_diff_detail = $commit->getCommitFileDiffDetail($c_id , $diff_commit_arr[0]);   
+    //該当コミットIDのメッセージの抽出処理
+    //print_r($c_id_arr);
+    $commit_detail = str_replace($c_id , "" , current($c_id_arr));
+    
+    $this->set('commit_detail', $commit_detail);
 
-    echo $commit_file_diff_detail;
-    //$arr = explode(" ", $commit_file_diff_detail);
-   
-    //print_r($arr);
-    */
+
+    if(isset($commit_arr[$c_id_key + 1])){
+	 $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
+    	$commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+    }
+
 if(isset($commit_file_diff)){
 	
 	$regex = "/\//";

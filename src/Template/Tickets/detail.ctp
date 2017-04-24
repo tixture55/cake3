@@ -18,6 +18,13 @@ if($tickets){
 
 
 }
+if($ticket_replies){
+	foreach ($ticket_replies as $this->value) {
+            $status = $this->value['status'];
+	}
+
+
+}
 
 ?> 
 <div class = "phui-header-header">
@@ -110,7 +117,7 @@ if($tickets){
 				<dt class="phui-property-list-key">
 					<?php 
 	foreach ($ticket_replies as $this->value) {
-             echo $this->value['details'];
+             echo $this->value['target_name'].": ".$this->value['details'];
 	     echo '<br>';
 	     echo '<hr>';
         }
