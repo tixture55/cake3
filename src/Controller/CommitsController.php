@@ -90,7 +90,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 
     //該当コミットIDのメッセージの抽出処理
-    //print_r($c_id_arr);
     $commit_detail = str_replace($c_id , "" , current($c_id_arr));
     
     $this->set('commit_detail', $commit_detail);

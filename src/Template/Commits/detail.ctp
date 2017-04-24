@@ -98,7 +98,7 @@ echo $commit_detail;
 <?php echo $titles[6]; ?>
 </td>
 <td>
-<?php echo $last_update; ?></td>
+<?php echo '未実装';//echo $last_update; ?></td>
 </tr>
 <?php
 
@@ -116,12 +116,12 @@ echo $commit_detail;
 			<div class="phui-property-list-properties-wrap "><dl class="phui-property-list-properties">
 				<dt class="phui-property-list-key">
 					<?php 
-	foreach ($ticket_replies as $this->value) {
+	//foreach ($ticket_replies as $this->value) {
              //echo $this->value['details'];
 	     echo '未実装';
 	     echo '<br>';
 	     echo '<hr>';
-        }
+        //}
 					?>
 
 				</dt>
