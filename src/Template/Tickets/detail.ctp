@@ -172,7 +172,9 @@ echo $this->Form->input(
                  ['placeholder' => '担当者を入力してください', 'label' => '担当者']		 
 		 
                  );
-echo $this -> Form -> submit ( "reply");
+echo $this->Form->submit(__(' reply ',true),array(
+    'name' => 'send',
+));
  echo '<p>';
  echo '</ul>';
  echo '</div>'; ?>

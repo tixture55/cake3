@@ -9,6 +9,8 @@ abstract class InsertController {}
 	public function postTicketReply($req , $ticket_id){
 
 		$this->Ticket_replies = TableRegistry::get('Ticket_replies');
+		$this->Ticket = TableRegistry::get('Tickets');
+		$ticket_update_status = $this->Ticket->get($ticket_id);
 
 		$reply = $this->Ticket_replies->newEntity();
 		$reply->details = $req->data('detail'); 
@@ -28,13 +30,12 @@ abstract class InsertController {}
 		$reply->last_update = date('Y/m/d H:i:s');
 		//if(!isset($tickets_duplicate) && $reply->status ==="open") $this->Ticket_replies->save($reply);
 		if($reply->status ==="open"){
-			 $this->Ticket_replies->save($reply);
+			 if($_POST['send']) $this->Ticket_replies->save($reply);
 		}elseif($reply->status ==="close"){
-			 $this->Tickets->save([
-				'id' => $ticket_id,
-				'status' => 'close',
-			 ]);
-			
+			 if($_POST['send']){ 
+				$ticket_update_status->status ="close";
+				$this->Ticket->save($ticket_update_status);
+			 }
 		}
 	}
 	
