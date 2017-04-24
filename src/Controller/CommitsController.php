@@ -65,9 +65,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
         throw new NotFoundException(__('チケットへの返信、もしくはコミットID、該当の案件IDが見つかりません。'));
     }
     
-
-    
-
     $commit = new GetCommitController();
     $commit_arr = $commit->getCommit(1,23);    
     $commit_num = $commit->getCommitNumber();
@@ -91,7 +88,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
     $commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
 
-if($commit_file_diff){
+if(isset($commit_file_diff)){
 	
 	$regex = "/\//";
 	$diff_filter_arr = array();
@@ -106,10 +103,14 @@ if($commit_file_diff){
     		return preg_match($regex, $value);
 	});
         $diff_filter_arr = array_diff_assoc($diff_filter_arr , $drop_filter_arr);
+    
+        $this->set('diff_files', $diff_filter_arr);
+
+}else{
+        throw new NotFoundException(__('git diffコマンドエラー'));
+	
 }
          
-   
-    $this->set('diff_files', $diff_filter_arr);
 
     $titles = $this->viewVars['titles'];
     $this->set('titles', $titles);
