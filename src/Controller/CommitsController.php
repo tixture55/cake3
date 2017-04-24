@@ -88,6 +88,14 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
     $commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
 
+
+    /*$commit_file_diff_detail = $commit->getCommitFileDiffDetail($c_id , $diff_commit_arr[0]);   
+
+    echo $commit_file_diff_detail;
+    //$arr = explode(" ", $commit_file_diff_detail);
+   
+    //print_r($arr);
+    */
 if(isset($commit_file_diff)){
 	
 	$regex = "/\//";

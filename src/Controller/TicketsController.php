@@ -29,7 +29,6 @@ class TicketsController extends AppController {
     $ticket_id = $id->getTicketId(Router::reverse($this->request));    
  
     $tickets = $this->Ticket->find()
-	//->select(['id','posts_id', 'status', 'details', 'target_name','last_update'])
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
     
     
@@ -52,6 +51,7 @@ class TicketsController extends AppController {
 	    
 	}
     }
+
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
    
