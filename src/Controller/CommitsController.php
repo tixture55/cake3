@@ -18,6 +18,11 @@ class CommitsController extends AppController {
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
+    	$this->Post = TableRegistry::get('Posts');
+    	$this->Ticket = TableRegistry::get('Tickets');
+    	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
+    	$this->Commit = TableRegistry::get('Commits');
+    	$this->Task_detail = TableRegistry::get('Task_details');
     }
   
 
@@ -28,13 +33,6 @@ class CommitsController extends AppController {
     $ticket_id = $id->getTicketId(Router::reverse($this->request));    
     $c_id = $id->getCommitId(Router::reverse($this->request));    
     
-
-    $this->Post = TableRegistry::get('Posts');
-    $this->Ticket = TableRegistry::get('Tickets');
-    $this->Ticket_replies = TableRegistry::get('Ticket_replies');
-    $this->Commit = TableRegistry::get('Commits');
-    $this->Task_detail = TableRegistry::get('Task_details');
-   
 
     $tickets = $this->Ticket->find()
 	//->select(['id','posts_id', 'status', 'details', 'target_name','last_update'])
@@ -56,11 +54,18 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 
-    $this->set('posts', $posts);
-    $this->set('tickets', $tickets);
-    $this->set('ticket_replies', $ticket_replies);
-    $this->set('commits', $commits);
-    $this->set('c_id', $c_id);
+    if(isset($tickets) && isset($commits) && isset($posts) && isset($ticket_replies) && isset($c_id)){
+        $this->set('tickets', $tickets);
+    	$this->set('posts', $posts);
+    	$this->set('ticket_replies', $ticket_replies);
+    	$this->set('commits', $commits);
+    	$this->set('c_id', $c_id);
+    
+    }else{
+        throw new NotFoundException(__('チケットへの返信、もしくはコミットID、該当の案件IDが見つかりません。'));
+    }
+    
+
     
 
     $commit = new GetCommitController();
@@ -69,18 +74,15 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
     $branch = $commit->getBranch();
 
-    $commit_id_arr = array();
-    $commit_detail_arr = array();
-   
+    if(isset($commit_arr) || isset($commit_num) || isset($branch)){
+    	$this->set('commit_arr', $commit_arr);
+        $this->set('commit_num', $commit_num);
+        $this->set('branch', $branch);
+    
+    }else{
+        throw new NotFoundException(__('コミットもしくはブランチが見つかりません。'));
+    }
 
-if($commit_arr){
-          foreach ($commit_arr as $this->value) {
-               $pieces = explode(" ", $this->value);
-	       $commit_detail = str_replace($pieces[0] , "" , $this->value);
-	       array_push($commit_id_arr , $pieces[0]);
-	       array_push($commit_detail_arr , $commit_detail);
-          }
- }
     $regex = "/".$c_id."/";
     $c_id_arr = array_filter($commit_arr, function($value) use($regex) {
     		return preg_match($regex, $value);
@@ -107,13 +109,10 @@ if($commit_file_diff){
 }
          
    
-    $this->set('branch', $branch);
     $this->set('diff_files', $diff_filter_arr);
-    $this->set('commit_num', $commit_num);
 
     $titles = $this->viewVars['titles'];
     $this->set('titles', $titles);
-    $this->set('commit_arr', $commit_arr);
     
     if($this->request->data('detail')){
         $ins = new InsertController();
