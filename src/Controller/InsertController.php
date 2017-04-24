@@ -32,8 +32,9 @@ abstract class InsertController {}
 		if($reply->status ==="open"){
 			 if($_POST['send']) $this->Ticket_replies->save($reply);
 		}elseif($reply->status ==="close"){
-			 if($_POST['send']){ 
+			if($_POST['send'] && isset($_POST['detail'])){ 
 				$ticket_update_status->status ="close";
+			        $this->Ticket_replies->save($reply);
 				$this->Ticket->save($ticket_update_status);
 			 }
 		}
