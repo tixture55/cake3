@@ -17,8 +17,8 @@ abstract class InsertController {}
 		
                 //二重送信の禁止
                 $tickets_duplicate = $this->Ticket_replies->find()
-			->select(['details'])
-			->where(['Ticket_replies.details' => $reply->details]);
+			->select(['posts_id','details'])
+			->where(['Ticket_replies.posts_id' => $ticket_id]);
 		if($req->data('status') == 0){
 			$reply->status = "open";
 		}else{
@@ -32,7 +32,7 @@ abstract class InsertController {}
 		if($reply->status ==="open"){
 			 if($_POST['send']) $this->Ticket_replies->save($reply);
 		}elseif($reply->status ==="close"){
-			if($_POST['send'] && isset($_POST['detail'])){ 
+			if($_POST['send'] && !isset($tickets_duplicate)){ 
 				$ticket_update_status->status ="close";
 			        $this->Ticket_replies->save($reply);
 				$this->Ticket->save($ticket_update_status);
