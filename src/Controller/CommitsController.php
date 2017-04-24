@@ -71,7 +71,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 $commit_id_arr = array();
 $commit_detail_arr = array();
-    
+   
+
 if($commit_arr){
           foreach ($commit_arr as $this->value) {
                $pieces = explode(" ", $this->value);
@@ -80,10 +81,14 @@ if($commit_arr){
 	       array_push($commit_detail_arr , $commit_detail);
           }
  }
-    
-    $commit_file_diff = $commit->getCommitFileDiff($commit_id_arr[0] , $commit_id_arr[1]);   
+    $regex = "/".$c_id."/";
+    $c_id_arr = array_filter($commit_arr, function($value) use($regex) {
+    		return preg_match($regex, $value);
+	});
+    $c_id_key = key($c_id_arr);
+    $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
+    $commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
 
-//echo $commit_file_diff;
 if($commit_file_diff){
 	
 	$regex = "/\//";
