@@ -6,6 +6,7 @@ if($posts){
             $work = $this->value['work'];
         }
 }
+
 if($tickets){
 	foreach ($tickets as $this->value) {
             $ticket_id = $this->value['id'];
@@ -58,7 +59,7 @@ if($commits){
 <?php echo $titles[3]; ?>
 </td>
 <td>
-<?php echo $ticket_detail; ?></td>
+<?php echo 'unwritten not yet';//$ticket_detail; ?></td>
 </tr>
 <tr>
 <td>

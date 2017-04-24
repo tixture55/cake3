@@ -69,8 +69,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
     $branch = $commit->getBranch();
 
-$commit_id_arr = array();
-$commit_detail_arr = array();
+    $commit_id_arr = array();
+    $commit_detail_arr = array();
    
 
 if($commit_arr){
