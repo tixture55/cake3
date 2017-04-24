@@ -56,6 +56,7 @@ class TicketsController extends AppController {
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
    
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
+    
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 

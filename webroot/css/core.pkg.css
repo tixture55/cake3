@@ -273,6 +273,32 @@ button,a.button {
 button.phabricator-action-view-item {
 	-webkit-font-smoothing:auto
 }
+
+
+
+select, input, textarea, button { 
+     vertical-align:middle; 
+     font-family:"ＭＳ Ｐゴシック", arial, helvetica, clean, sans-serif; 
+     position:relative; 
+     margin: 0 4px 2px 0;
+     *margin-right:3px; 
+     top:-1px;  
+}
+
+
+input.commit_search {
+	width: 300px;
+	vertical-align: middle;
+	overflow:visible;
+	position:relative;
+}
+
+
+button, input[type="button"] {
+     overflow:visible; 
+     padding:0 3px;
+}
+
 button::-moz-focus-inner,input::-moz-focus-inner {
 	border:0;
 	padding:0

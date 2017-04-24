@@ -127,8 +127,14 @@ if($ticket_replies){
 </a>
 	</div>
 <div class="phui-box phui-box-border phui-object-box mlt mll mlr phui-box-blue-property "><div class="phui-header-shell "><h1 class="phui-header-view"><div class="phui-header-row"><div class="phui-header-col2"><span class="phui-header-header">Details</span></div><div class="phui-header-col3"></div></div></h1></div><div class="phui-property-list-section"><div class="phui-property-list-container grouped"><div class="phui-property-list-properties-wrap "><dl class="phui-property-list-properties"><dt class="phui-property-list-key">Commits #総コミット数：<?php echo $commit_num; ?> </dt><dd class="phui-property-list-value">
-<?php
 
+
+<?php
+echo $this -> Form -> text( "textbox", [ "class" => "commit_search"] );
+echo '<br>';
+echo $this->Form->button('コミットの検索', [ 'id' => 'commit' ,"class" => "commit_search", 'type' => 'button']);
+echo '<br>';
+echo '<br>';
 $pieces = array();
 
 if($commit_arr){

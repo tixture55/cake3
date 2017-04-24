@@ -21,6 +21,7 @@
 $works = array();
 
 if($tasks){
+	array_push($works , NULL);
 	foreach ($tasks as $this->value) {
 		array_push($works , $this->value['work']);
 	}
@@ -131,9 +132,7 @@ echo '</br>';
 echo '</br>';
 
 
-$id = $this->request->data('hello.plice');
-
- echo $this->element( 'ticket_form', array( 'works' => $works ) );?>
+?>
 <br>
 <br>
 </body>

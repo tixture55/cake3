@@ -1,6 +1,7 @@
 
 
 $(function() {
+		
 		$("input[name='ticket_title']").val('');
 		$("input[name='detail']").val('');
 		$("input[name='target_name']").val('');
@@ -19,17 +20,16 @@ $(function() {
 		$(document).ready(function () {
 				$("#commit").click(function () {
 						inputText = $(".commit_search").val();
-						$('a').each(function(){
-							if($(this).text().indexOf(inputText) != -1){
+		$('a').each(function(){
+				if($(this).text().indexOf(inputText) != -1){
 
-							}else{
-								$(this).hide();
+				}else{
+					$(this).hide();
 
-							}
-						});
+				}
+				});
+						})
 				})
-		})
-		
 		$("input[type='submit']").click(function(){
 				if($("input[name='detail']").val() == ""){
 				alert('空です')
