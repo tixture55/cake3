@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-final class PanelEditController extends PanelController{
+class PanelEditController extends PanelController{
 
 	protected $title;
 
