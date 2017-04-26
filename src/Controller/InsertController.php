@@ -24,7 +24,6 @@ final class InsertController {
 	}
 	
         public function postTicket($req){
-
 		$this->Ticket = TableRegistry::get('Tickets');
 
 		$post = $this->Ticket->newEntity();
@@ -51,6 +50,7 @@ final class InsertController {
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
+		$this->Ticket->save($post);
 		if(!isset($details) && isset($task_id) ) $this->Ticket->save($post);
 	}
 

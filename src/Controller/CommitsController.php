@@ -18,8 +18,6 @@ class CommitsController extends AppController {
         parent::initialize();
         $this->loadComponent('Paginator');
         $this->loadComponent('Flash');
-	//$this->loadComponent('Security');
-        //$this->Security->requireSecure();
     }
   
 

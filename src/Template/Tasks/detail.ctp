@@ -70,31 +70,11 @@ if($tickets){
 
 	echo '</table>';
 
-echo '<div class="ticket-title"><h3>新しいチケット作成</h3></div>';
-echo '<div>';
-echo $this->Form->create('hello', array('url' => 'add','method' => 'post'));
- /*echo $this->Form->hidden(
-                 'id' ,
-                 array('value' => $id)
-                 );*/
- echo $this->Form->hidden(
-                 'trans_status' ,
-                 array('value' => 0)
-                 );
- echo $this->Form->input(
-                 'hello.plice',
-                 array('label' => 'チケットタイトル')
-                 );
- echo $this->Form->input(
-                 'hello.bank',
-                 array('label' => '内容')
-                 );
- echo $this->Form->input(
-                 'hello.account',
-                 array('label' => '担当者名')
-                 );
-echo $this -> Form -> submit ( "チケット作成");
- //echo $this->Form->end();
+ 
+ echo $this->element( 'ticket_form' );
+echo '<br>';
+echo '<br>';
+echo '<br>';
  echo '<p>';
  echo '</ul>';
  echo '</div>';

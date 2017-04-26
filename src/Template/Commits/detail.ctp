@@ -8,6 +8,7 @@ if($posts){
 }
 if($tickets){
 	foreach ($tickets as $this->value) {
+            $ticket_id = $this->value['id'];
             $ticket_name = $this->value['title'];
             $target_name = $this->value['target_name'];
         }
