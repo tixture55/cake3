@@ -1,13 +1,11 @@
-<h1>users</h1>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Username</th>
-    </tr>
-    <?php foreach ($users as $user): ?>
-    <tr>
-        <td><?= $user->id ?></td>
-        <td><?= $this->Html->link($user->username, ['action' => 'view', $user->id]) ?></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+<div class="users form">
+<?= $this->Flash->render() ?>
+<?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Please enter your username and password') ?></legend>
+        <?= $this->Form->control('username') ?>
+        <?= $this->Form->control('password') ?>
+    </fieldset>
+<?= $this->Form->button(__('Login')); ?>
+<?= $this->Form->end() ?>
+</div>

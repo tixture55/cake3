@@ -48,6 +48,26 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            
+            'authenticate' => [
+		    'Form' => [
+                        'fields' => [
+                            'username' => 'username',
+                            'password' => 'password'
+                        ]
+                    ]
+                ],
+	    'loginRedirect' => [
+                'controller' => 'Posts',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
+            ]
+        ]);
 
         $title_arr = array();
 
@@ -59,7 +79,8 @@ class AppController extends Controller
 
     
     }
-     public function isAuthorized($user) /* add */
+     
+      public function isAuthorized($user) /* add */
     {
         return false;
     }
@@ -70,6 +91,13 @@ class AppController extends Controller
      * @param \Cake\Event\Event $event The beforeRender event.
      * @return void
      */
+     
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['view', 'display']);
+    }
+
+
     public function beforeRender(Event $event)
     {
         if (!array_key_exists('_serialize', $this->viewVars) &&

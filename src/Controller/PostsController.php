@@ -30,6 +30,7 @@ class PostsController extends AppController {
     	$this->Post = TableRegistry::get('Posts');
     	$this->Ticket = TableRegistry::get('Tickets');
     }
+
   
   public function index() {
  
