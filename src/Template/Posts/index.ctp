@@ -128,6 +128,7 @@ echo '</div>';
 
 echo '</div>';
 echo '</p>';
+echo $this->element( 'ticket_form',array('works' => $works) );
 echo '</br>';
 echo '</br>';
 

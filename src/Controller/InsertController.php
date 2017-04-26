@@ -56,6 +56,7 @@ abstract class InsertController {}
 				$details = $this->value['details'];
 			}
 			$task_id = $req->data('works');
+		        echo $task_id;
 		}
 		$post->title  = $req->data('ticket_title'); 
 		
@@ -70,7 +71,6 @@ abstract class InsertController {}
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
-		$this->Ticket->save($post);
 		if(!isset($details) && isset($task_id) ) $this->Ticket->save($post);
 		//if(!isset($details)) $this->Ticket->save($post);
 	}
