@@ -17,6 +17,7 @@ final class TicketFormEditController extends PanelEditController{
 	    }elseif(strcmp($view , "tickets") === 0){
 
 		$this->task_flg = false;
+	    
 	    }elseif(strcmp($view , "posts") === 0){
 
 		$this->task_flg = true;
@@ -26,7 +27,8 @@ final class TicketFormEditController extends PanelEditController{
    		$this->task_flg = false;
 	    
 	    }else{
-
+        	throw new NotFoundException(__('URLが不正です。'));
+	    
 	    }
  		return $this->task_flg;
 	}

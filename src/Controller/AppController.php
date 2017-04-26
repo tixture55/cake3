@@ -84,7 +84,6 @@ class AppController extends Controller
         if(strpos($view , "/" , 0)) $view = strstr($view,"/", TRUE);
         if(strpos($view , "?" , 0)) $view = strstr($view,"?", TRUE);
       
-        //$list = new PanelEditController(); 
         $list = new TicketFormEditController(); 
 	$titles = $list->setTitle($view); 
         $task_flg = $list->setTicketForm($view);

@@ -14,6 +14,12 @@ if($task_details){
             $recent_ticket = $this->value['recent_ticket'];
         }
 }
+$details = array();
+if($tickets){
+	foreach ($tickets as $this->value) {
+            array_push($details , $this->value['details']);
+        }
+}
 ?> 
 
 
@@ -45,7 +51,11 @@ if($task_details){
 <?php echo $titles[3]; ?>
 </td>
 <td>
-		<a href="<?php echo $this->Url->build(['controller'=>'Tickets', 'action'=>'detail', 'ticket_id' => $task_id]); ?>" class="something"><?php echo $recent_ticket; ?></a>
+<?php foreach($details as $val){ ?>	
+	<a href="<?php echo $this->Url->build(['controller'=>'Tickets', 'action'=>'detail', 'ticket_id' => $task_id]); ?>" class="something"><?php echo $val; ?></a>
+<?php echo '<br>'; ?>
+<?php echo '<br>'; ?>
+<?php } ?>
 </tr>
 <tr>
 <td>

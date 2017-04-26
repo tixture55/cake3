@@ -37,7 +37,7 @@ class PostsController extends AppController {
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
 			->order(['last_update' => 'DESC'])
-			->limit(3);
+			->limit(5);
  
     $users = $this->paginate($this->Post);
     $tasks = $this->Post->find()
