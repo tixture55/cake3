@@ -27,7 +27,6 @@ final class TicketFormEditController extends PanelEditController{
    		$this->task_flg = false;
 	    
 	    }else{
-        	throw new NotFoundException(__('URLが不正です。'));
 	    
 	    }
  		return $this->task_flg;
