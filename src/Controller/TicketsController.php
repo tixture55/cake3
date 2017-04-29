@@ -72,7 +72,16 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
   
   }
   public function modify() {
-        $ins = new InsertHistoryController();
+	  /*$value ='<a href="shougi4.php">';
+
+	  $rs=array(
+			  "message" => $value
+		   );
+
+	  header('Content-Type: application/json; charset=utf-8');
+	  echo json_encode($rs);*/
+	  
+	  $ins = new InsertHistoryController();
         //$ins->insertReadHistory($this->request , $ticket_id);     
   
   }

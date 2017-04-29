@@ -43,6 +43,7 @@ $(function() {
 			$.get('/cake3/tickets/modify', { 
 				name:$('#ticket_id').text()     
 			}, function(data){      
+				$('#result2').html(data.message + "次の問題へ進む");
 				$('#read_status').html("既読");   
 				$('.button3').hide();
 			});
