@@ -64,6 +64,23 @@ if($tickets){
 <?php
 
 		echo '</tr>';
+?>
+<tr>
+<td>
+<?php echo $titles[5]; ?>
+</td>
+<td>
+<?php echo '未読　　';echo $this->Form->button('既読にする',
+			 ['type' => 'button',
+			  'class' => 'button3'
+			]);
+
+
+//echo $read_status; ?></td>
+</tr>
+<?php
+
+		echo '</tr>';
 
 	echo '</table>';
 
@@ -114,12 +131,7 @@ if($commit_arr){
 
 <?php echo '<div id="main">';
 
-//replyボタンを押した場合はticket_idのパラメータを持っていないため、DBから値が取れなくて、画面が真っ赤になる
 echo $this->Form->create('Tickets', array('url' => '/tickets/detail?ticket_id='.$ticket_id,'method' => 'post'));
- /*echo $this->Form->hidden(
-                 'id' ,
-                 array('value' => $id)
-                 );*/
  echo $this->Form->hidden(
                  'trans_status' ,
                  array('value' => 0)

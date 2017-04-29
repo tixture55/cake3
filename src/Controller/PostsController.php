@@ -27,12 +27,12 @@ class PostsController extends AppController {
     {
         parent::initialize();
         $this->loadComponent('Paginator');
+    	$this->Post = TableRegistry::get('Posts');
+    	$this->Ticket = TableRegistry::get('Tickets');
     }
   
   public function index() {
  
-    $this->Post = TableRegistry::get('Posts');
-    $this->Ticket = TableRegistry::get('Tickets');
 
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
