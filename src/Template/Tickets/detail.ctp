@@ -77,11 +77,16 @@ if($tickets){
 <?php echo $titles[6]; ?>
 </td>
 <td>
-<?php echo '<div id="read_status">未読　　';
+<?php 
+   if(isset($isReadTicket) && $isReadTicket){
+      echo '<div id="read_status">既読';
+   }else{
+      echo '<div id="read_status">未読　　';
       echo $this->Form->button('既読にする',
 			 ['type' => 'button',
 			  'class' => 'button3'
 			]);
+   }
 ?>
 </div>
 <?php 

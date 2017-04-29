@@ -17,6 +17,7 @@ class TicketsController extends AppController {
 	$this->Post = TableRegistry::get('Posts');
     	$this->Ticket = TableRegistry::get('Tickets');
     	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
+    	$this->Ticket_read_histories = TableRegistry::get('Ticket_read_histories');
     	$this->Commit = TableRegistry::get('Commits');
     	$this->Task_detail = TableRegistry::get('Task_details');
     }
@@ -24,7 +25,6 @@ class TicketsController extends AppController {
 
   public function detail() {
  
-
     $id = new GetIdFromUrlController;
     $ticket_id = $id->getTicketId(Router::reverse($this->request));    
  
@@ -40,6 +40,17 @@ class TicketsController extends AppController {
         }
     }elseif(empty($tickets)){
         throw new NotFoundException(__('チケットが見つかりません。'));
+    }
+    
+    $ticket_read_histories = $this->Ticket_read_histories->find()
+	->where(['Ticket_read_histories.posts_id' => $ticket_id]);
+    if($ticket_read_histories){
+	foreach ($ticket_read_histories as $this->value) {
+            $posts_id_read = $this->value['posts_id'];
+    	    
+	    if($posts_id_read  > 0) $this->set('isReadTicket', true);
+	    
+	}
     }
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
@@ -72,15 +83,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
   
   }
   public function modify() {
-	  /*$value ='<a href="shougi4.php">';
-
-	  $rs=array(
-			  "message" => $value
-		   );
-
-	  header('Content-Type: application/json; charset=utf-8');
-	  echo json_encode($rs);*/
-	  if($this->request->isAjax()){
+	  
+	if($this->request->isAjax()){
 		
 		$ins = new InsertHistoryController();
         	$ins->insertReadHistory($this->request->params['?']['name']);     
