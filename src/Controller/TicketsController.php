@@ -80,9 +80,10 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 	  header('Content-Type: application/json; charset=utf-8');
 	  echo json_encode($rs);*/
-	  
-	  $ins = new InsertHistoryController();
-        //$ins->insertReadHistory($this->request , $ticket_id);     
-  
+	  if($this->request->isAjax()){
+		
+		$ins = new InsertHistoryController();
+        	$ins->insertReadHistory($this->request->params['?']['name']);     
+  	  }
   }
 }

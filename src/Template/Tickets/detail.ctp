@@ -97,7 +97,6 @@ if($tickets){
 </p>
 </div>
 
-<div id="result2"></div>
 <div class="phui-box phui-box-border phui-object-box mlt mll mlr phui-box-blue-property "><div class="phui-header-shell "><h1 class="phui-header-view"><div class="phui-header-row"><div class="phui-header-col2"><span class="phui-header-header">チケットへの返信</span></div>
 
 	<div class="phui-header-col3"></div></div></h1></div>
