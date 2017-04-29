@@ -5,7 +5,7 @@ final class InsertHistoryController {
 
 
 	//画面によって、セットするタイトルを変える
-	public function insertReadHistory($req , $ticket_id){
+	public function insertReadHistory(){
 
 		$this->Ticket_replies = TableRegistry::get('Ticket_replies');
 

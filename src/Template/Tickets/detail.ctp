@@ -20,7 +20,6 @@ if($tickets){
 }
 
 ?> 
-
 <div class = "phui-header-header">
 
 <table border="1">
@@ -28,13 +27,21 @@ if($tickets){
 <td width="100">
 <?php echo $titles[0]; ?>
 </td>
+<td id="ticket_id" width="200">
+<?php echo $ticket_id; ?>
+</td>
+</tr>
+<tr>
+<td width="100">
+<?php echo $titles[1]; ?>
+</td>
 <td width="200">
 <?php echo $ticket_name; ?>
 </td>
 </tr>
 <tr>
 <td>
-<?php echo $titles[1]; ?>
+<?php echo $titles[2]; ?>
 </td>
 <td>
 <span><span class="phui-tag-core ">
@@ -42,21 +49,21 @@ if($tickets){
 </tr>
 <tr>
 <td>
-<?php echo $titles[2]; ?>
+<?php echo $titles[3]; ?>
 </td>
 <td>
 <?php echo $work; ?></td>
 </tr>
 <tr>
 <td>
-<?php echo $titles[3]; ?>
+<?php echo $titles[4]; ?>
 </td>
 <td>
 <?php echo $ticket_detail; ?></td>
 </tr>
 <tr>
 <td>
-<?php echo $titles[4]; ?>
+<?php echo $titles[5]; ?>
 </td>
 <td>
 <?php echo $last_update; ?></td>
@@ -67,7 +74,7 @@ if($tickets){
 ?>
 <tr>
 <td>
-<?php echo $titles[5]; ?>
+<?php echo $titles[6]; ?>
 </td>
 <td>
 <?php echo '<div id="read_status">未読　　';
