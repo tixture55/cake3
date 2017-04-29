@@ -71,4 +71,9 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     }
   
   }
+  public function modify() {
+        $ins = new InsertController();
+        //$ins->insertReadHistory($this->request , $ticket_id);     
+  
+  }
 }
