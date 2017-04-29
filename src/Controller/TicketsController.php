@@ -72,7 +72,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
   
   }
   public function modify() {
-        $ins = new InsertController();
+        $ins = new InsertHistoryController();
         //$ins->insertReadHistory($this->request , $ticket_id);     
   
   }
