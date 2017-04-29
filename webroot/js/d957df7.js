@@ -43,11 +43,13 @@ $(function() {
 				return false;
 				}
 		});
+		
 		$(document).on('click', '.button3', function (){
-		$.get('http://localhost:8080/cake3/posts/index', { 
+		$.get('/cake3/tickets/modify_read_status', { 
 			name:$('#ques4').val()     
 		}, function(data){      
-			$('#result2').html(data.message + "次の問題へ進む");   
+			$('#read_status').html("既読");   
+			$('.button3').hide();
 		});
 		});
 

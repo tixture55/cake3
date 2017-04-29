@@ -70,12 +70,14 @@ if($tickets){
 <?php echo $titles[5]; ?>
 </td>
 <td>
-<?php echo '未読　　';echo $this->Form->button('既読にする',
+<?php echo '<div id="read_status">未読　　';
+      echo $this->Form->button('既読にする',
 			 ['type' => 'button',
 			  'class' => 'button3'
 			]);
-
-
+?>
+</div>
+<?php 
 //echo $read_status; ?></td>
 </tr>
 <?php
