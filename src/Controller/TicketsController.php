@@ -9,17 +9,16 @@ use Cake\Network\Exception\NotFoundException;
 
 class TicketsController extends AppController {
  
-  public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates']
-    ];
  
   public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Paginator');
-        $this->loadComponent('Flash');
-	//$this->loadComponent('Security');
-        //$this->Security->requireSecure();
+    	
+	$this->Post = TableRegistry::get('Posts');
+    	$this->Ticket = TableRegistry::get('Tickets');
+    	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
+    	$this->Commit = TableRegistry::get('Commits');
+    	$this->Task_detail = TableRegistry::get('Task_details');
     }
   
 
@@ -29,13 +28,6 @@ class TicketsController extends AppController {
     $id = new GetIdFromUrlController;
     $ticket_id = $id->getTicketId(Router::reverse($this->request));    
  
-    $this->Post = TableRegistry::get('Posts');
-    $this->Ticket = TableRegistry::get('Tickets');
-    $this->Ticket_replies = TableRegistry::get('Ticket_replies');
-    $this->Commit = TableRegistry::get('Commits');
-    $this->Task_detail = TableRegistry::get('Task_details');
-   
-
     $tickets = $this->Ticket->find()
 	//->select(['id','posts_id', 'status', 'details', 'target_name','last_update'])
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);

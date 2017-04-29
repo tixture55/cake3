@@ -1,6 +1,16 @@
 
 
 $(function() {
+		//target2 = document.getElementById("ques4").value;
+		//target = document.getElementById("output");
+		//var pre ="羽生：そうですね、ここで飛車交換を挑むと、一気に桂馬が上がってきて、優勢の継続を許すことになります";
+		//target.innerHTML = pre;
+		$.get('http://localhost:8080/cake3/tickets/insert_view_history', { 
+			name:$('#ques4').val()     
+		}, function(data){      
+			$('#result2').html(data.message + "次の問題へ進む");   
+		});
+
 		$("input[name='ticket_title']").val('');
 		$("input[name='detail']").val('');
 		$("input[name='target_name']").val('');
@@ -16,7 +26,20 @@ $(function() {
 
 				}
 				});
+		$(document).ready(function () {
+				$("#commit").click(function () {
+						inputText = $(".commit_search").val();
+						$('a').each(function(){
+							if($(this).text().indexOf(inputText) != -1){
 
+							}else{
+								$(this).hide();
+
+							}
+						});
+				})
+		})
+		
 		$("input[type='submit']").click(function(){
 				if($("input[name='detail']").val() == ""){
 				alert('空です')
@@ -24,7 +47,7 @@ $(function() {
 				// 処理を中断
 				return false;
 				}
-				});
+		});
 
 
 });
