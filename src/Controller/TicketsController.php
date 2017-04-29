@@ -88,6 +88,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 		
 		$ins = new InsertHistoryController();
         	$ins->insertReadHistory($this->request->params['?']['name']);     
-  	  }
+  	}else{ 
+		$this->log("Illegal Request was sent not in the ajax one.".__METHOD__."()  line:87",'critical');	  
+	}
   }
 }
