@@ -1,13 +1,13 @@
 <?php
 namespace App\Controller;
 use Cake\ORM\TableRegistry;
+
 final class InsertPostController extends InsertController{
 
 
 	//画面によって、セットするタイトルを変える
 	public function postTicketReply($req , $ticket_id){
 
-		$this->Ticket_replies = TableRegistry::get('Ticket_replies');
 
 		$reply = $this->Ticket_replies->newEntity();
 		$reply->details = $req->data('detail'); 
@@ -24,7 +24,6 @@ final class InsertPostController extends InsertController{
 	}
 	
         public function postTicket($req){
-		$this->Ticket = TableRegistry::get('Tickets');
 
 		$post = $this->Ticket->newEntity();
 		$post->task_id = $req->data('works'); 
@@ -33,14 +32,6 @@ final class InsertPostController extends InsertController{
     		$tickets = $this->Ticket->find()
 			->select(['task_id','details'])
 			->where(['Tickets.details' => $post->details]);
-
-		if($tickets){
-			foreach ($tickets as $this->value) {
-				$task_id = $this->value['task_id'];
-				$details = $this->value['details'];
-			}
-		}
-		
 		$post->title  = $req->data('ticket_title'); 
 		
 		if($req->data('status') == 0){
@@ -52,7 +43,7 @@ final class InsertPostController extends InsertController{
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
-		if(isset($details)){
+		if($tickets->count() > 0){
 		
 		}else{
 		 	$this->Ticket->save($post);

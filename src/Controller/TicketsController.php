@@ -50,6 +50,7 @@ class TicketsController extends AppController {
 	    if($posts_id_read  > 0) $this->set('isReadTicket', true);
 	    
 	}
+	if($posts_id_read  > 0) $this->set('isReadTicket', true);
     }
 
 

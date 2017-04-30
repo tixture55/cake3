@@ -71,7 +71,6 @@ class AppController extends Controller
 
         $title_arr = array();
 
-	//$this->getTraceAsString();
 
 
         $this->set('titles', $this->_getTitle());
