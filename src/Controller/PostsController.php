@@ -53,8 +53,9 @@ class PostsController extends AppController {
 
 
         $union_query = $this->Ticket->find()
+    		->where(['status' => 'status'])	
 		->order(['last_update' => 'DESC'])
-		->limit(5);
+		->limit(2);
 	
 
 	$tickets->union($union_query);
