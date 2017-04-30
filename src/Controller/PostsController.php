@@ -52,14 +52,12 @@ class PostsController extends AppController {
 		->limit(3);
 
 
-    	//上記クエリで取得されたチケット以外を指定するサブクエリを作る
-        $tickets_union = $this->Ticket->find()
-    		->where(['status' => 'close'])	
+        $union_query = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
-		->limit(2);
+		->limit(5);
 	
 
-	$tickets->union($tickets_union);
+	$tickets->union($union_query);
 
     }
  
