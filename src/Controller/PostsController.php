@@ -39,22 +39,30 @@ class PostsController extends AppController {
     $tickets = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
 		->limit(5);
-/*
+
     //openチケットが3以上含まれているかのチェック(CheckTicketControllerをモックに置き換える)
-    $check_ticket = new CheckTicketController();
-    $open_ticket_num = checkTicket($tickets); 
+    //$check_ticket = new CheckTicketController();
+    //$open_ticket_num = checkTicket($tickets); 
+    $open_ticket_num = 2; 
 
     if($open_ticket_num < 3){
     	$tickets = $this->Ticket->find()
+    		->where(['status' => 'open'])	
 		->order(['last_update' => 'DESC'])
 		->limit(3);
+
+
     	//上記クエリで取得されたチケット以外を指定するサブクエリを作る
         $tickets_union = $this->Ticket->find()
+    		->where(['status' => 'close'])	
 		->order(['last_update' => 'DESC'])
 		->limit(2);
+	
+
+	$tickets->union($tickets_union);
 
     }
- */
+ 
     $users = $this->paginate($this->Post);
     $tasks = $this->Post->find()
 		->select(['work']);
@@ -62,7 +70,8 @@ class PostsController extends AppController {
     $this->set(compact("posts","users", "tasks", "tickets","titles"));
     
     if(isset($_POST['send']) && $this->request->data('detail')){
-        $ins = new InsertPostController();
+        //print_r($this->request);
+	$ins = new InsertPostController();
         $ins->postTicket($this->request);     
     
     }

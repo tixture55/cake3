@@ -11,6 +11,7 @@ final class InsertPostController extends InsertController{
 
 		$reply = $this->Ticket_replies->newEntity();
 		$reply->details = $req->data('detail'); 
+
 		if($req->data('status') == 0){
 			$reply->status = "open";
 		}else{
@@ -29,6 +30,7 @@ final class InsertPostController extends InsertController{
 		$post->task_id = $req->data('works'); 
 		$post->posts_id = $req->data('works'); 
 		$post->details = $req->data('detail'); 
+
     		$tickets = $this->Ticket->find()
 			->select(['task_id','details'])
 			->where(['Tickets.details' => $post->details]);
@@ -43,15 +45,15 @@ final class InsertPostController extends InsertController{
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
+		
 		if($tickets->count() > 0){
 		
 		}else{
 		 	$this->Ticket->save($post);
 		}
+				
+		return $post;
 	}
-
-
-
 
 
 
