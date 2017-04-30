@@ -2,10 +2,6 @@
 echo '<h3>新しいチケット作成</h3>';
 echo '<div id="main">';
 echo $this->Form->create('hello', array('url' => '/posts','method' => 'post'));
- /*echo $this->Form->hidden(
-                 'id' ,
-                 array('value' => $id)
-                 );*/
  echo $this->Form->hidden(
                  'trans_status' ,
                  array('value' => 0)
@@ -28,8 +24,6 @@ if(isset($works)){
                  'target_name',
                  array('label' => '担当者名')
                  );
-//echo $this -> Form -> submit ("チケット作成"); 
- //echo $this->Form->end();
 echo $this->Form->submit(__(' チケット作成 ',true),array(
     'name' => 'send',
 ));

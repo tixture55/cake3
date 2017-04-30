@@ -19,7 +19,6 @@
 
 <?php
 $works = array();
-
 if($tasks){
 	array_push($works , NULL);
 	foreach ($tasks as $this->value) {

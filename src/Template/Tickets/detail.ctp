@@ -1,10 +1,13 @@
 <?php 
 
+
 $work = array();
 
 if($posts){
 	foreach ($posts as $this->value) {
-            $work = $this->value['work'];
+            	
+		$posts_id = $this->value['posts_id'];
+		$work = $this->value['work'];
         }
 }
 if($tickets){

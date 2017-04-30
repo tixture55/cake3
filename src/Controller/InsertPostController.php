@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 use Cake\ORM\TableRegistry;
-final class InsertController {
+final class InsertPostController extends InsertController{
 
 
 	//画面によって、セットするタイトルを変える
@@ -27,6 +27,8 @@ final class InsertController {
 		$this->Ticket = TableRegistry::get('Tickets');
 
 		$post = $this->Ticket->newEntity();
+		$post->task_id = $req->data('works'); 
+		$post->posts_id = $req->data('works'); 
 		$post->details = $req->data('detail'); 
     		$tickets = $this->Ticket->find()
 			->select(['task_id','details'])
@@ -50,8 +52,11 @@ final class InsertController {
 		$post->target_name = $req->data('target_name');
 		$post->last_update = date('Y/m/d H:i:s');
 		$post->deadline = date('Y/m/d H:i:s');
-		$this->Ticket->save($post);
-		if(!isset($details) && isset($task_id) ) $this->Ticket->save($post);
+		if(isset($details)){
+		
+		}else{
+		 	$this->Ticket->save($post);
+		}
 	}
 
 

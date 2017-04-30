@@ -35,7 +35,7 @@ class TicketsController extends AppController {
     if($tickets){
 	foreach ($tickets as $this->value) {
             $posts_id = $this->value['posts_id'];
-            $ticket_id = $this->value['id'];
+	    $ticket_id = $this->value['id'];
         }
     }elseif(empty($tickets)){
         throw new NotFoundException(__('チケットが見つかりません。'));
@@ -77,7 +77,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $this->set('commit_arr', $commit_arr);
     
     if($this->request->data('detail')){
-        $ins = new InsertController();
+        $ins = new InsertPostController();
         $ins->postTicketReply($this->request , $ticket_id);     
     
     }
