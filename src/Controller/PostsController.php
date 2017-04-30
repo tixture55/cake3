@@ -53,12 +53,13 @@ class PostsController extends AppController {
 
 
         $union_query = $this->Ticket->find()
-    		->where(['status' => 'status'])	
+    		->where(['status' => 'close'])	
 		->order(['last_update' => 'DESC'])
 		->limit(2);
 	
 
 	$tickets->union($union_query);
+	
 
     }
  
@@ -69,7 +70,6 @@ class PostsController extends AppController {
     $this->set(compact("posts","users", "tasks", "tickets","titles"));
     
     if(isset($_POST['send']) && $this->request->data('detail')){
-        //print_r($this->request);
 	$ins = new InsertPostController();
         $ins->postTicket($this->request);     
     
