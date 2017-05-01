@@ -26,18 +26,17 @@ class TasksController extends AppController {
     $task_id = str_replace("taskId=" , "" , $task_id);
        
     $posts = $this->Post->find()->where(['Posts.id' => $task_id]);
+    
     $tickets = $this->Ticket->find()
 			->order(['last_update' => 'DESC'])
 			->limit(3)
 			->where(['Tickets.posts_id' => $task_id]);
+    
     $task_details = $this->Task_detail->find()->where(['Task_details.task_id' => $task_id]);
     
-    $this->set('posts', $posts);
-    $this->set('tickets', $tickets);
-    $this->set('task_details', $task_details);
     
     $titles = $this->viewVars['titles'];
-    $this->set('titles', $titles);
+    $this->set(compact("posts","tickets","task_details","titles"));
   
   }
 }
