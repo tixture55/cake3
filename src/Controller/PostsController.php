@@ -39,10 +39,10 @@ class PostsController extends AppController {
 		->limit(5);
 
     //openチケットが3以上含まれているかのチェック(CheckTicketControllerをモックに置き換える)
-    //$check_ticket = new CheckTicketController();
-    //$open_ticket_num = checkTicket($tickets); 
-    $open_ticket_num = 2; 
+    $check_ticket = new CheckTicketController();
+    $open_ticket_num = $check_ticket->checkTicket(); 
 
+    echo $open_ticket_num;
     if($open_ticket_num < 3){
     	$tickets = $this->Ticket->find()
     		->where(['status' => 'open'])	

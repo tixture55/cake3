@@ -12,6 +12,7 @@ abstract class InsertController {
 		$this->Ticket = TableRegistry::get('Tickets');
 		$this->Ticket_replies = TableRegistry::get('Ticket_replies');
 		$this->Ticket_read_histories = TableRegistry::get('Ticket_read_histories');
+
 		$reply = $this->Ticket_replies->newEntity();
 		$this->reply = $reply;
 
