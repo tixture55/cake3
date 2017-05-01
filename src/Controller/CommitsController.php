@@ -143,6 +143,15 @@ if(isset($commit_file_diff_detail)){
 	preg_replace($pattern, $replacement, $replace_br);
 	*/
 	$replace_br = str_replace(");", ");</div><br>", $replace_br);
+	$replace_br = preg_replace("/class[^=]/", "<font color=\"green\">class </font>", $replace_br);
+	$replace_br = preg_replace("/extends/", "<font color=\"green\">extends </font>", $replace_br);
+	$replace_br = preg_replace("/-\>/", "<font color=\"green\">-></font>", $replace_br);
+	$replace_br = preg_replace("/DESC/", "<font color=\"red\">$0</font>", $replace_br);
+	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
+	$replace_br = preg_replace("/\-/", "<font color=\"red\">$0</font>", $replace_br);
+	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
+	//$replace_br = preg_replace("/\+.$/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
+	//$replace_br = preg_replace("/[[0-9]|\(|\)|\[|\]]/", "<font color=\"red\">$0</font>", $replace_br);
 	//echo $replace_br;
 }
     $titles = $this->viewVars['titles'];
