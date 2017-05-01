@@ -5,7 +5,6 @@ use Cake\ORM\TableRegistry;
 abstract class InsertController {
 
 	protected $reply;
-	protected $post;
 
 	function __construct(){
 
@@ -15,9 +14,6 @@ abstract class InsertController {
 		$this->Ticket_read_histories = TableRegistry::get('Ticket_read_histories');
 		$reply = $this->Ticket_replies->newEntity();
 		$this->reply = $reply;
-
-		$post = $this->Ticket->newEntity();
-		$this->post = $post;
 
 	}
 
