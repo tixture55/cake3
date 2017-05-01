@@ -18,8 +18,16 @@ class CommitsController extends AppController {
   public function detail() {
  
 
-    $id = new GetIdFromUrlController;
-    $ticket_id = $id->getTicketId(Router::reverse($this->request));    
+    $id = new GetIdFromUrlController();
+    $commit = new GetCommitController();
+   
+    $obj_list = [$id , $commit];
+    
+    $arr = parent::mpull($obj_list , 'getId');    
+    $commit_num = parent::mpull($obj_list,'getCommitNumber');    
+    
+    $ticket_id = $arr[0];    
+    
     $c_id = $id->getCommitId(Router::reverse($this->request));    
     
 
@@ -49,8 +57,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
         throw new NotFoundException(__('チケットへの返信、もしくはコミットID、該当の案件IDが見つかりません。'));
     }
     
-    $commit = new GetCommitController();
-    $commit_arr = $commit->getCommit(1,23);    
+    $commit_arr = $arr[1];    
     $commit_num = $commit->getCommitNumber();
 
     $branch = $commit->getBranch();
