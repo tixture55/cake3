@@ -17,6 +17,7 @@ use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
+use Cake\ORM\TableRegistry;
 
 
 
@@ -69,6 +70,12 @@ class AppController extends Controller
             ]
         ]);
 
+	$this->Post = TableRegistry::get('Posts');
+    	$this->Ticket = TableRegistry::get('Tickets');
+    	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
+    	$this->Ticket_read_histories = TableRegistry::get('Ticket_read_histories');
+    	$this->Commit = TableRegistry::get('Commits');
+    	$this->Task_detail = TableRegistry::get('Task_details');
         $title_arr = array();
 
 

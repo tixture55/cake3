@@ -27,8 +27,6 @@ class PostsController extends AppController {
     {
         parent::initialize();
         $this->loadComponent('Paginator');
-    	$this->Post = TableRegistry::get('Posts');
-    	$this->Ticket = TableRegistry::get('Tickets');
     }
 
   

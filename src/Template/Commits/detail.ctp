@@ -89,13 +89,20 @@ if($commits){
  }
 */
 
-echo $commit_detail;
-?>
+echo $replace_br; ?></td>
+
 </td>
 </tr>
 <tr>
 <td>
 <?php echo $titles[6]; ?>
+</td>
+<td>
+<?php echo $commit_detail; ?>
+</tr>
+<tr>
+<td>
+<?php echo $titles[7]; ?>
 </td>
 <td>
 <?php echo '未実装';//echo $last_update; ?></td>

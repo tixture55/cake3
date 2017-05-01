@@ -2,7 +2,6 @@
 
 //CakePHP3のPostsController.php
 namespace App\Controller;
-use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Network\Exception\NotFoundException;
@@ -16,13 +15,6 @@ class CommitsController extends AppController {
   public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Paginator');
-        $this->loadComponent('Flash');
-    	$this->Post = TableRegistry::get('Posts');
-    	$this->Ticket = TableRegistry::get('Tickets');
-    	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
-    	$this->Commit = TableRegistry::get('Commits');
-    	$this->Task_detail = TableRegistry::get('Task_details');
     }
   
 
@@ -55,12 +47,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     
 
     if(isset($tickets) && isset($commits) && isset($posts) && isset($ticket_replies) && isset($c_id)){
-        $this->set('tickets', $tickets);
-    	$this->set('posts', $posts);
-    	$this->set('ticket_replies', $ticket_replies);
-    	$this->set('commits', $commits);
-    	$this->set('c_id', $c_id);
     
+        $this->set(compact('posts','tickets','ticket_replies','commits','c_id'));
     }else{
         throw new NotFoundException(__('チケットへの返信、もしくはコミットID、該当の案件IDが見つかりません。'));
     }
@@ -73,9 +61,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 
     if(isset($commit_arr) || isset($commit_num) || isset($branch)){
-    	$this->set('commit_arr', $commit_arr);
-        $this->set('commit_num', $commit_num);
-        $this->set('branch', $branch);
+        $this->set(compact('commit_arr','commit_num','branch'));
     
     }else{
         throw new NotFoundException(__('コミットもしくはブランチが見つかりません。'));
@@ -96,8 +82,14 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 
     if(isset($commit_arr[$c_id_key + 1])){
-	 $diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
+	 
+	$diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
     	$commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+    	
+	$commit_file_diff_detail = $commit->getCommitFileDiffDetail($c_id , $diff_commit_arr[0]);   
+    
+    }else{
+	$commit_file_diff = "target commit is nothing";	
     }
 
 if(isset($commit_file_diff)){
@@ -123,9 +115,30 @@ if(isset($commit_file_diff)){
 	
 }
          
+if(isset($commit_file_diff_detail)){
+	//echo $commit_file_diff_detail;
 
+	$diff_sep_arr = explode(" " , $commit_file_diff_detail);
+        //swapファイルの除外
+        $regex = "/sw/";
+        $drop_filter_arr = array_filter($diff_sep_arr, function($value) use($regex) {
+    		return preg_match($regex, $value);
+	});
+        $diff_filter_arr = array_diff_assoc($diff_sep_arr , $drop_filter_arr);
+	//print_r($diff_filter_arr);
+	$trimed_swp_diff = implode(" ", $diff_filter_arr);
+	//echo $trimed_swp_diff;
+	$replace_br = str_replace("@@", "<br>", $trimed_swp_diff);
+	$replace_br = str_replace("+", "<br><div class=\"plus\">+", $replace_br);
+	/*$pattern = '/-^[\>]/';
+	$replacement ='<br><div class=\"minus\">-';
+	preg_replace($pattern, $replacement, $replace_br);
+	*/
+	$replace_br = str_replace(");", ");<br>", $replace_br);
+	//echo $replace_br;
+}
     $titles = $this->viewVars['titles'];
-    $this->set('titles', $titles);
+    $this->set(compact('titles','replace_br'));
     
     if($this->request->data('detail')){
         $ins = new InsertController();

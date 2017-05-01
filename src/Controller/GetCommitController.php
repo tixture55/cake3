@@ -52,7 +52,7 @@ final class GetCommitController {
 	
 	public function getCommitFileDiffDetail($commit_id , $commit_id2){
 
-	        $shell_str = "git log -p ".$commit_id." ".$commit_id2;
+	        $shell_str = "git diff ".$commit_id." ".$commit_id2;
 		$file_diff = shell_exec($shell_str);
 		
                 

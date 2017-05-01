@@ -2,7 +2,6 @@
 
 //CakePHP3のPostsController.php
 namespace App\Controller;
-use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Network\Exception\NotFoundException;
@@ -14,12 +13,6 @@ class TicketsController extends AppController {
     {
         parent::initialize();
     	
-	$this->Post = TableRegistry::get('Posts');
-    	$this->Ticket = TableRegistry::get('Tickets');
-    	$this->Ticket_replies = TableRegistry::get('Ticket_replies');
-    	$this->Ticket_read_histories = TableRegistry::get('Ticket_read_histories');
-    	$this->Commit = TableRegistry::get('Commits');
-    	$this->Task_detail = TableRegistry::get('Task_details');
     }
   
 
@@ -43,6 +36,7 @@ class TicketsController extends AppController {
     
     $ticket_read_histories = $this->Ticket_read_histories->find()
 	->where(['Ticket_read_histories.posts_id' => $ticket_id]);
+    
     if($ticket_read_histories){
 	foreach ($ticket_read_histories as $this->value) {
             $posts_id_read = $this->value['posts_id'];
@@ -50,7 +44,6 @@ class TicketsController extends AppController {
 	    if($posts_id_read  > 0) $this->set('isReadTicket', true);
 	    
 	}
-	if($posts_id_read  > 0) $this->set('isReadTicket', true);
     }
 
 
@@ -61,21 +54,13 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 
-    $this->set('posts', $posts);
-    $this->set('tickets', $tickets);
-    $this->set('ticket_replies', $ticket_replies);
-    $this->set('commits', $commits);
-    
-
     $commit = new GetCommitController();
     $commit_arr = $commit->getCommit(1,23);    
     $commit_num = $commit->getCommitNumber();
     
-    $this->set('commit_num', $commit_num);
 
     $titles = $this->viewVars['titles'];
-    $this->set('titles', $titles);
-    $this->set('commit_arr', $commit_arr);
+    $this->set(compact('posts','tickets','ticket_replies','commits','commit_num',"commit_arr","titles"));
     
     if($this->request->data('detail')){
         $ins = new InsertPostController();
