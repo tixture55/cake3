@@ -1,0 +1,5 @@
+== Info: About to connect() to localhost port 8080 (#0)
+== Info:   Trying ::1... == Info: Connection refused
+== Info:   Trying 127.0.0.1... == Info: Connection refused
+== Info: couldn't connect to host
+== Info: Closing connection #0

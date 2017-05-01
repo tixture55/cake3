@@ -32,6 +32,8 @@ final class InsertPostController extends InsertController{
 		if($ticket_replies->count() > 0){
 		
 		}else{
+		 	//ticketsテーブル、ticket_repliesテーブル両方にsaveできるように書き換える
+			//$this->Ticket->save($this->reply);
 		 	$this->Ticket_replies->save($this->reply);
 		}
 	}
