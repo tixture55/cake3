@@ -1,20 +1,24 @@
 <?php
 namespace App\Controller;
-use Cake\ORM\TableRegistry;
+
 final class InsertHistoryController extends InsertController{
 
 
+        function __construct(){
+		parent::__construct();
+
+	}	
+	
 	//画面によって、セットするタイトルを変える
 	public function insertReadHistory(int $ticket_id){
 
 
-		$reply = $this->Ticket_read_histories->newEntity();
-		$reply->status ="already read";
+		$this->reply->status ="already read";
 
-		$reply->posts_id = $ticket_id;
-		$reply->last_update = date('Y/m/d H:i:s');
+		$this->reply->posts_id = $ticket_id;
+		$this->reply->last_update = date('Y/m/d H:i:s');
 		
-		$this->Ticket_read_histories->save($reply);
+		$this->Ticket_read_histories->save($this->reply);
 	}
 	
 
