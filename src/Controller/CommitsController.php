@@ -8,9 +8,6 @@ use Cake\Network\Exception\NotFoundException;
 
 class CommitsController extends AppController {
  
-  public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates']
-    ];
  
   public function initialize()
     {
@@ -27,7 +24,6 @@ class CommitsController extends AppController {
     
 
     $tickets = $this->Ticket->find()
-	//->select(['id','posts_id', 'status', 'details', 'target_name','last_update'])
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
     
     
@@ -125,23 +121,10 @@ if(isset($commit_file_diff_detail)){
     		return preg_match($regex, $value);
 	});
         $diff_filter_arr = array_diff_assoc($diff_sep_arr , $drop_filter_arr);
-	//print_r($diff_filter_arr);
 	$trimed_swp_diff = implode(" ", $diff_filter_arr);
-	//echo $trimed_swp_diff;
 	$replace_br = str_replace("@@", "<br><br>", $trimed_swp_diff);
 	$replace_br = str_replace("+", "<br><div class=\"plus\">+", $replace_br);
-	//$replace_br = str_replace("-", "<br><div class=\"minus\">-", $replace_br);
-	//$minus_location = strpos($replace_br , 0 , "-");
-	//$br_location = strpos($replace_br , $minus_location , "<br>");
-/*
-	$pattern = '/[0-9]/';
-	if(preg_match($pattern , substr($replace_br , $minus_location , $br_location)) === 0){
-		
-	}*/	
-	//$pattern = '/-.*/;';
-	/*$replacement ='<br><div class=\"minus\">-';
-	preg_replace($pattern, $replacement, $replace_br);
-	*/
+	
 	$replace_br = str_replace(");", ");</div><br>", $replace_br);
 	$replace_br = preg_replace("/class[^=]/", "<font color=\"green\">class </font>", $replace_br);
 	$replace_br = preg_replace("/abstract|protected|public|return|extends|final|new/", "<font color=\"green\">$0 </font>", $replace_br);
@@ -151,12 +134,7 @@ if(isset($commit_file_diff_detail)){
 	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
-	//$replace_br = preg_replace("/\-.*/", "<div style=\"background-color:#FFFF99;\">$0</div>", $replace_br);
-	
 
-	//$replace_br = preg_replace("/\-.*(?!color)/", "<div style=\"background-color:#FFFF99;\">$0</div>", $replace_br);
-	//$replace_br = preg_replace("/[[0-9]|\(|\)|\[|\]]/", "<font color=\"red\">$0</font>", $replace_br);
-	//echo $replace_br;
 }
     $titles = $this->viewVars['titles'];
     $this->set(compact('titles','replace_br'));
