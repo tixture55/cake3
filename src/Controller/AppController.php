@@ -121,7 +121,20 @@ class AppController extends Controller
 		$ticket_id = $obj->getTicketId(Router::reverse($this->request));
 
 		return $ticket_id;
-	}	
+	
+	}elseif($obj instanceof GetCommitController){
+		if(strcmp($method , 'getCommit') === 0 ){
+			$commits = $obj->getCommit(1,30);
+
+			return $commits;
+		}elseif(strcmp($method , 'getCommitNumber') === 0){
+			$commit_num = $obj->getCommitNumber();
+
+			return $commit_num;
+
+		}
+	}
+	
     }
  
     private function _getTitle(){
