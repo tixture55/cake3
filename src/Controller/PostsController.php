@@ -10,9 +10,6 @@ use App\Controller\Component\MethodPullComponent;
 
 class PostsController extends AppController {
  
-  private $m_pull;
-  public $components = ['MethodPull'];
-
   public $helpers = [
         'Paginator' => ['templates' => 'paginator-templates']
     ];
@@ -31,7 +28,6 @@ class PostsController extends AppController {
     {
         parent::initialize();
         $this->loadComponent('Paginator');
-        $this->loadComponent('MethodPull');
     }
 
   
