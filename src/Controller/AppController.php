@@ -78,8 +78,6 @@ class AppController extends Controller
     	$this->Task_detail = TableRegistry::get('Task_details');
         $title_arr = array();
 
-
-
         $this->set('titles', $this->_getTitle());
         
 
@@ -119,6 +117,10 @@ class AppController extends Controller
 		$num = $obj->checkTicket();
 
 		return $num;
+	}elseif($obj instanceof GetIdFromUrlController){
+		$ticket_id = $obj->getTicketId(Router::reverse($this->request));
+
+		return $ticket_id;
 	}	
     }
  

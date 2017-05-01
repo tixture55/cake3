@@ -2,8 +2,6 @@
 
 //CakePHP3のPostsController.php
 namespace App\Controller;
-use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
 use Cake\Network\Exception\NotFoundException;
 
 class TicketsController extends AppController {
@@ -18,7 +16,7 @@ class TicketsController extends AppController {
   public function detail() {
  
     $id = new GetIdFromUrlController;
-    $ticket_id = $id->getTicketId(Router::reverse($this->request));    
+    $ticket_id = parent::mpull($id ,'getTicketId');    
  
     $tickets = $this->Ticket->find()
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
