@@ -128,13 +128,21 @@ if(isset($commit_file_diff_detail)){
 	//print_r($diff_filter_arr);
 	$trimed_swp_diff = implode(" ", $diff_filter_arr);
 	//echo $trimed_swp_diff;
-	$replace_br = str_replace("@@", "<br>", $trimed_swp_diff);
+	$replace_br = str_replace("@@", "<br><br>", $trimed_swp_diff);
 	$replace_br = str_replace("+", "<br><div class=\"plus\">+", $replace_br);
-	/*$pattern = '/-^[\>]/';
-	$replacement ='<br><div class=\"minus\">-';
+	//$replace_br = str_replace("-", "<br><div class=\"minus\">-", $replace_br);
+	//$minus_location = strpos($replace_br , 0 , "-");
+	//$br_location = strpos($replace_br , $minus_location , "<br>");
+/*
+	$pattern = '/[0-9]/';
+	if(preg_match($pattern , substr($replace_br , $minus_location , $br_location)) === 0){
+		
+	}*/	
+	//$pattern = '/-.*/;';
+	/*$replacement ='<br><div class=\"minus\">-';
 	preg_replace($pattern, $replacement, $replace_br);
 	*/
-	$replace_br = str_replace(");", ");<br>", $replace_br);
+	$replace_br = str_replace(");", ");</div><br>", $replace_br);
 	//echo $replace_br;
 }
     $titles = $this->viewVars['titles'];
