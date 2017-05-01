@@ -146,11 +146,14 @@ if(isset($commit_file_diff_detail)){
 	$replace_br = preg_replace("/class[^=]/", "<font color=\"green\">class </font>", $replace_br);
 	$replace_br = preg_replace("/extends|final|new/", "<font color=\"green\">$0 </font>", $replace_br);
 	$replace_br = preg_replace("/\-/", "<font color=\"red\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/-\>/", "<font color=\"green\">-></font>", $replace_br);
 	$replace_br = preg_replace("/DESC/", "<font color=\"red\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
+	//$replace_br = preg_replace("/\-.*/", "<div style=\"background-color:#FFFF99;\">$0</div>", $replace_br);
+	
+
+	//$replace_br = preg_replace("/\-.*(?!color)/", "<div style=\"background-color:#FFFF99;\">$0</div>", $replace_br);
 	//$replace_br = preg_replace("/[[0-9]|\(|\)|\[|\]]/", "<font color=\"red\">$0</font>", $replace_br);
 	//echo $replace_br;
 }
