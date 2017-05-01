@@ -111,30 +111,35 @@ class AppController extends Controller
         }
     }
    
-    protected function mpull($obj , String $method){
-	
-	if ($obj instanceof CheckTicketController) {
+    protected function mpull($list , String $method){
+
+        $arr = array();
+ 
+	foreach($list as $obj){  	
+	 
+	   if ($obj instanceof CheckTicketController) {
 		$num = $obj->checkTicket();
 
-		return $num;
-	}elseif($obj instanceof GetIdFromUrlController){
-		$ticket_id = $obj->getTicketId(Router::reverse($this->request));
+		array_push($arr , $num);
+	   }elseif($obj instanceof GetIdFromUrlController){
+		$ticket_id = $obj->getId(Router::reverse($this->request));
 
-		return $ticket_id;
+		array_push($arr , $ticket_id);
 	
-	}elseif($obj instanceof GetCommitController){
-		if(strcmp($method , 'getCommit') === 0 ){
-			$commits = $obj->getCommit(1,30);
+	   }elseif($obj instanceof GetCommitController){
+		if(strcmp($method , 'getId') === 0 ){
+			$commits = $obj->getId(1,30);
 
-			return $commits;
+			array_push($arr , $commits);
 		}elseif(strcmp($method , 'getCommitNumber') === 0){
 			$commit_num = $obj->getCommitNumber();
 
 			return $commit_num;
 
 		}
+	   }
 	}
-	
+	return $arr;
     }
  
     private function _getTitle(){

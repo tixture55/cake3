@@ -5,7 +5,7 @@ final class GetCommitController {
 
 
         //画面によって、セットするタイトルを変える
-	public function getCommit(int $start , int $end){
+	public function getId(int $start , int $end){
 		
 		$commit_arr = array();
 		

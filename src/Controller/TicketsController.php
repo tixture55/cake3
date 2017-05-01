@@ -15,11 +15,17 @@ class TicketsController extends AppController {
   
   public function detail() {
  
-    $id = new GetIdFromUrlController;
-    $ticket_id = parent::mpull($id ,'getTicketId');    
- 
+    $id = new GetIdFromUrlController();
+    $commit = new GetCommitController();
+   
+    $obj_list = [$id , $commit];
+
+    $arr = parent::mpull($obj_list , 'getId');    
+    $commit_num = parent::mpull($obj_list,'getCommitNumber');    
+
+
     $tickets = $this->Ticket->find()
-	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
+	->where(['Tickets.id' => $arr[0]])->contain(['Posts']);
     
     if($tickets){
 	foreach ($tickets as $this->value) {
@@ -51,9 +57,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 
-    $commit = new GetCommitController();
-    $commit_arr = parent::mpull($commit ,'getCommit');    
-    $commit_num = parent::mpull($commit ,'getCommitNumber');    
+    $commit_arr = $arr[1];    
     
 
     $titles = $this->viewVars['titles'];

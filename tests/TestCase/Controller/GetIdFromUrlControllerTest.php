@@ -21,7 +21,7 @@ class GetIdFromUrlControllerTest extends IntegrationTestCase
     public function testGetTicketId($url , $id)
     {
     	$test = new GetIdFromUrlController();
-	$return_id = $test->getTicketId($url);
+	$return_id = $test->getId($url);
 	$this->assertSame($id, intval($return_id));	
     }
 

@@ -18,10 +18,10 @@ class GetCommitControllerTest extends IntegrationTestCase
     public function testGetCommit()
     {
     	$test = new GetCommitController();
-	$this->assertCount(3, $test->getCommit(1 , 3));
-        $this->assertArrayHasKey(0, $test->getCommit(1 , 3));
-        $this->assertArrayHasKey(1, $test->getCommit(1 , 3));
-        $this->assertArrayHasKey(2, $test->getCommit(1 , 3));
+	$this->assertCount(3, $test->getId(1 , 3));
+        $this->assertArrayHasKey(0, $test->getId(1 , 3));
+        $this->assertArrayHasKey(1, $test->getId(1 , 3));
+        $this->assertArrayHasKey(2, $test->getId(1 , 3));
     }
 
     /**
