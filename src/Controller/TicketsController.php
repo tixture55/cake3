@@ -15,7 +15,6 @@ class TicketsController extends AppController {
     	
     }
   
-
   public function detail() {
  
     $id = new GetIdFromUrlController;
@@ -23,7 +22,6 @@ class TicketsController extends AppController {
  
     $tickets = $this->Ticket->find()
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
-    
     
     if($tickets){
 	foreach ($tickets as $this->value) {
@@ -35,15 +33,16 @@ class TicketsController extends AppController {
     }
     
     $ticket_read_histories = $this->Ticket_read_histories->find()
+	->select(['posts_id'])
 	->where(['Ticket_read_histories.posts_id' => $ticket_id]);
-    
-    if($ticket_read_histories){
-	foreach ($ticket_read_histories as $this->value) {
-            $posts_id_read = $this->value['posts_id'];
+   
+    $ticket_read_histories->hydrate(false);
+    $ticket_read_result = $ticket_read_histories->toList();
+
+    if(array_key_exists('posts_id' , $ticket_read_result)){
     	    
-	    if($posts_id_read  > 0) $this->set('isReadTicket', true);
+	    $this->set('isReadTicket', true);
 	    
-	}
     }
 
 

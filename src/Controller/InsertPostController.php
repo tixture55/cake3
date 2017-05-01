@@ -17,7 +17,6 @@ final class InsertPostController extends InsertController{
 		$this->reply->details = $req->data('detail'); 
 
     		$ticket_replies = $this->Ticket_replies->find()
-			->select(['task_id','details'])
 			->where(['Ticket_replies.details' => $this->reply->details]);
 		if($req->data('status') == 0){
 			$this->reply->status = "open";
