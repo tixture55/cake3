@@ -5,9 +5,13 @@ namespace App\Controller;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
+use App\Utils\AppUtility;
+use App\Controller\Component\MethodPullComponent;
 
 class PostsController extends AppController {
  
+  private $m_pull;
+  public $components = ['MethodPull'];
 
   public $helpers = [
         'Paginator' => ['templates' => 'paginator-templates']
@@ -27,6 +31,7 @@ class PostsController extends AppController {
     {
         parent::initialize();
         $this->loadComponent('Paginator');
+        $this->loadComponent('MethodPull');
     }
 
   
@@ -40,9 +45,9 @@ class PostsController extends AppController {
 
     //openチケットが3以上含まれているかのチェック(CheckTicketControllerをモックに置き換える)
     $check_ticket = new CheckTicketController();
-    $open_ticket_num = $check_ticket->checkTicket(); 
-
-    echo $open_ticket_num;
+  
+    $open_ticket_num = parent::mpull($check_ticket , 'checkTicket');
+    
     if($open_ticket_num < 3){
     	$tickets = $this->Ticket->find()
     		->where(['status' => 'open'])	

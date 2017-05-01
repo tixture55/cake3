@@ -112,7 +112,16 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
-    
+   
+    protected function mpull($obj , String $method){
+	
+	if ($obj instanceof CheckTicketController) {
+		$num = $obj->checkTicket();
+
+		return $num;
+	}	
+    }
+ 
     private function _getTitle(){
         $view = strstr(Router::reverse($this->request) , "cake3/");               $view = str_replace("cake3/" , "" , $view);
         if(strpos($view , "/" , 0)) $view = strstr($view,"/", TRUE);
