@@ -9,12 +9,6 @@ final class GetIdFromUrlController extends GetIdController{
 	protected $url;
 
 
-/*
-	function __construct($url){
-	   
-	
-	}
-*/
         //画面によって、セットするタイトルを変える
 	public function getTicketId(String $url){
 	   
@@ -37,7 +31,6 @@ final class GetIdFromUrlController extends GetIdController{
 	   $this->commit_id = $url_arr[1];
            $this->commit_id = strstr($this->commit_id  , "commit_id=");
 	   $this->commit_id = str_replace("commit_id=" , "" , $this->commit_id);
-           //echo $this->commit_id; 
 		return $this->commit_id;
 	}
 	
