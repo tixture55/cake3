@@ -16,6 +16,7 @@ class TicketsController extends AppController {
   public function detail() {
  
    
+    unset($this->list['check_ticket']);
 
     //debug($this->Auth->user());
 
@@ -53,9 +54,8 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
     
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
-    
+ 
     $commit_arr = $arr[1];
-    $commit_num = $arr[2];    
     
 
     $titles = $this->viewVars['titles'];

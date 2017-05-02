@@ -85,7 +85,7 @@ class AppController extends Controller
         $id = new GetIdFromUrlController();
         $commit = new GetCommitController();
     	
-	$obj_list = [$id , $commit , $check_ticket];
+	$obj_list = ['id' => $id , 'commit' => $commit , 'check_ticket' => $check_ticket];
         
 	$this->list = $obj_list;
     
@@ -128,8 +128,8 @@ class AppController extends Controller
 	   if ($obj instanceof CheckTicketController) {
 
 		$num = $obj->checkTicket();
-		array_push($arr , $num);	
-	
+		
+		return $num;	
 
 	   }elseif($obj instanceof GetIdFromUrlController){
 		if(strcmp($method , 'getId') === 0 ){
