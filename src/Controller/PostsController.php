@@ -33,6 +33,9 @@ class PostsController extends AppController {
   
   public function index() {
  
+    unset($this->list['id']);
+    unset($this->list['commit']);
+
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
@@ -40,7 +43,6 @@ class PostsController extends AppController {
 
   
     $open_ticket_num = parent::mpull($this->list, 'checkTicket' , null);
-   
  
     if($open_ticket_num < 3){
     	$tickets = $this->Ticket->find()

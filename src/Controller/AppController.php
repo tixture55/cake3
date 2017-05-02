@@ -128,8 +128,8 @@ class AppController extends Controller
 	   if ($obj instanceof CheckTicketController) {
 
 		$num = $obj->checkTicket();
-		array_push($arr , $num);	
-	
+		
+		return $num;	
 
 	   }elseif($obj instanceof GetIdFromUrlController){
 		if(strcmp($method , 'getId') === 0 ){
