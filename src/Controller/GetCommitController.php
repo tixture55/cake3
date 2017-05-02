@@ -14,7 +14,6 @@ final class GetCommitController {
 			$start = $start + 1;
 			array_push($commit_arr ,shell_exec($shell_str));
  		}
-		
 		return $commit_arr;
 	}
 	

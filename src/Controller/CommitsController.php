@@ -18,12 +18,7 @@ class CommitsController extends AppController {
   public function detail() {
  
 
-    $id = new GetIdFromUrlController();
-    $commit = new GetCommitController();
-   
-    $obj_list = [$id , $commit];
-    
-    $arr = parent::mpull($obj_list , 'getId');    
+    $arr = parent::mpull($this->list , 'getId');    
     $commit_num = parent::mpull($obj_list,'getCommitNumber');    
     
     $ticket_id = $arr[0];    

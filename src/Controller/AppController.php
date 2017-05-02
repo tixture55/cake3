@@ -41,7 +41,8 @@ class AppController extends Controller
      *
      * @return void
      */
-
+ 
+    protected $list;
 
     public function initialize()
     {
@@ -79,8 +80,15 @@ class AppController extends Controller
         $title_arr = array();
 
         $this->set('titles', $this->_getTitle());
+    	
+	$check_ticket = new CheckTicketController();
+        $id = new GetIdFromUrlController();
+        $commit = new GetCommitController();
+    	
+	$obj_list = [$id , $commit , $check_ticket];
+	//$obj_list = [$id , $check_ticket];
         
-
+	$this->list = $obj_list;
     
     }
      
@@ -114,29 +122,37 @@ class AppController extends Controller
     protected function mpull($list , String $method){
         
 	$arr = array();
- 
+
 	foreach($list as $obj){  	
 	 
 	   if ($obj instanceof CheckTicketController) {
 
 		$num = $obj->checkTicket();
-		
-	   	return $num;
+		array_push($arr , $num);	
+	
 
 	   }elseif($obj instanceof GetIdFromUrlController){
-		$ticket_id = $obj->getId(Router::reverse($this->request));
+		if(strcmp($method , 'getId') === 0 ){
+			$ticket_id = $obj->getId(Router::reverse($this->request));
+			array_push($arr , $ticket_id);
 
-		array_push($arr , $ticket_id);
-	
+		}elseif(strcmp($method , 'getCommitId') === 0){
+			$commit_id = $obj->getCommitId(Router::reverse($this->request));
+			//return $commit_id;
+			array_push($arr , $commit_id);
+			
+		}
 	   }elseif($obj instanceof GetCommitController){
 		if(strcmp($method , 'getId') === 0 ){
-			$commits = $obj->getId(1,30);
+			$commit_arr = $obj->getId(1,30);
 
-			array_push($arr , $commits);
-		}elseif(strcmp($method , 'getCommitNumber') === 0){
+			array_push($arr , $commit_arr);
+		}
+
+		if(strcmp($method , 'getCommitNumber') === 0){
 			$commit_num = $obj->getCommitNumber();
 
-			return $commit_num;
+			array_push($arr , $commit_num);
 
 		}
 	   }
