@@ -42,16 +42,21 @@ class CommitsController extends AppController {
     }
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
-   
+  
+    foreach($ticket_replies as $val){
+
+	//echo $val['details'];	
+    }
+ 
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 
-    if(isset($tickets) && isset($commits) && isset($posts) && isset($ticket_replies) && isset($c_id)){
+    if(!empty($tickets) && !empty($commits) && !empty($posts) && !empty($c_id)){
     
         $this->set(compact('posts','tickets','ticket_replies','commits','c_id'));
     }else{
-        throw new NotFoundException(__('チケットへの返信、もしくはコミットID、該当の案件IDが見つかりません。'));
+        throw new NotFoundException(__('コミットID、該当の案件IDが見つかりません。'));
     }
     
     $commit_arr = $arr[1];    
