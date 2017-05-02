@@ -61,7 +61,16 @@ class PostsController extends AppController {
 	
 
 	$tickets->union($union_query);
-	
+	//unionのパラメータがなければ、esort()をAppControllerに実装する
+		/*esort($entity , $sort_key)
+			$entity    : find()の結果セット
+			$sort_key  : sortの方法
+			$order:    : ASC , DESC
+
+			return     :sortされたentity
+		*/
+	//$tickets->order(['last_update' => 'DESC']);
+	//$tickets->union($union_query , array([order] => 'last_update' => 'DESC'));
 
     }
  
