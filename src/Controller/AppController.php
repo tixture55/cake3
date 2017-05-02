@@ -149,10 +149,18 @@ class AppController extends Controller
 		}elseif(strcmp($method , 'getCommitNumber') === 0){
 			$commit_num = $obj->getCommitNumber();
 
-			array_push($arr , $commit_num);
+			return $commit_num;
 
+		}elseif(strcmp($method , 'getBranch') === 0){
+		        $branch = $obj->getBranch();		
+			return $branch;
+		
 		}elseif(strcmp($method , 'getCommitFileDiff') === 0){
 		        $file_diff = $obj->getCommitFileDiff($parameter);		
+			return $file_diff;		
+		}elseif(strcmp($method , 'getCommitFileDiffDetail') === 0){
+		        $file_diff = $obj->getCommitFileDiffDetail($parameter);
+			return $file_diff;		
 		}
 	   }
 	}
