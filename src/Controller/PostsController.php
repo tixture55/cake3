@@ -34,16 +34,19 @@ class PostsController extends AppController {
   public function index() {
  
 
+    $check_ticket = new CheckTicketController();
+    
+    $obj_list = [$check_ticket];
+    
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
 		->limit(5);
 
-    //openチケットが3以上含まれているかのチェック(CheckTicketControllerをモックに置き換える)
-    $check_ticket = new CheckTicketController();
   
-    $open_ticket_num = parent::mpull($check_ticket , 'checkTicket');
-    
+    $open_ticket_num = parent::mpull($obj_list, 'checkTicket');
+   
+ 
     if($open_ticket_num < 3){
     	$tickets = $this->Ticket->find()
     		->where(['status' => 'open'])	

@@ -112,15 +112,17 @@ class AppController extends Controller
     }
    
     protected function mpull($list , String $method){
-
-        $arr = array();
+        
+	$arr = array();
  
 	foreach($list as $obj){  	
 	 
 	   if ($obj instanceof CheckTicketController) {
-		$num = $obj->checkTicket();
 
-		array_push($arr , $num);
+		$num = $obj->checkTicket();
+		
+	   	return $num;
+
 	   }elseif($obj instanceof GetIdFromUrlController){
 		$ticket_id = $obj->getId(Router::reverse($this->request));
 
