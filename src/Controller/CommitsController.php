@@ -17,6 +17,7 @@ class CommitsController extends AppController {
 
   public function detail() {
  
+    unset($this->list['check_ticket']);
 
     $arr = parent::mpull($this->list , 'getId' , null);    
     $c_id = parent::mpull($this->list , 'getCommitId', null );    

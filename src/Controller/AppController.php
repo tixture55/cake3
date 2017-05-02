@@ -85,7 +85,7 @@ class AppController extends Controller
         $id = new GetIdFromUrlController();
         $commit = new GetCommitController();
     	
-	$obj_list = [$id , $commit , $check_ticket];
+	$obj_list = ['id' => $id , 'commit' => $commit , 'check_ticket' => $check_ticket];
         
 	$this->list = $obj_list;
     

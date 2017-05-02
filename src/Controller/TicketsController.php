@@ -16,6 +16,7 @@ class TicketsController extends AppController {
   public function detail() {
  
    
+    unset($this->list['check_ticket']);
 
     //debug($this->Auth->user());
 
