@@ -18,17 +18,13 @@ class CommitsController extends AppController {
   public function detail() {
  
 
-    $id = new GetIdFromUrlController();
-    $commit = new GetCommitController();
+    $arr = parent::mpull($this->list , 'getId' , null);    
+    $c_id = parent::mpull($this->list , 'getCommitId', null );    
+    $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
+    $branch = parent::mpull($this->list,'getBranch' , null);    
    
-    $obj_list = [$id , $commit];
-    
-    $arr = parent::mpull($obj_list , 'getId');    
-    $commit_num = parent::mpull($obj_list,'getCommitNumber');    
-    
     $ticket_id = $arr[0];    
     
-    $c_id = $id->getCommitId(Router::reverse($this->request));    
     
 
     $tickets = $this->Ticket->find()
@@ -58,9 +54,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     }
     
     $commit_arr = $arr[1];    
-    $commit_num = $commit->getCommitNumber();
 
-    $branch = $commit->getBranch();
 
 
     if(isset($commit_arr) || isset($commit_num) || isset($branch)){
@@ -81,22 +75,24 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     //該当コミットIDのメッセージの抽出処理
     $commit_detail = str_replace($c_id , "" , current($c_id_arr));
     
-    $this->set('commit_detail', $commit_detail);
 
 
     if(isset($commit_arr[$c_id_key + 1])){
 	 
 	$diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
-    	$commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+        $arr_file_diff = [$c_id , $diff_commit_arr[0]];
+        
+	$commit_file_diff = parent::mpull($this->list,'getCommitFileDiff' , $arr_file_diff);    
+        $commit_file_diff_detail = parent::mpull($this->list,'getCommitFileDiffDetail' , $arr_file_diff);    
     	
-	$commit_file_diff_detail = $commit->getCommitFileDiffDetail($c_id , $diff_commit_arr[0]);   
     
     }else{
 	$commit_file_diff = "target commit is nothing";	
     }
 
 if(isset($commit_file_diff)){
-	
+
+        //print_r($commit_file_diff);	
 	$regex = "/\//";
 	$diff_filter_arr = array();
 	$diff_sep_arr = explode(" " , $commit_file_diff);
@@ -144,7 +140,7 @@ if(isset($commit_file_diff_detail)){
 
 }
     $titles = $this->viewVars['titles'];
-    $this->set(compact('titles','replace_br'));
+    $this->set(compact('titles','replace_br','commit_detail'));
     
     if($this->request->data('detail')){
         $ins = new InsertController();

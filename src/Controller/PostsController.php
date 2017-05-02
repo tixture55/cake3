@@ -33,18 +33,13 @@ class PostsController extends AppController {
   
   public function index() {
  
-
-    $check_ticket = new CheckTicketController();
-    
-    $obj_list = [$check_ticket];
-    
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
 		->limit(5);
 
   
-    $open_ticket_num = parent::mpull($obj_list, 'checkTicket');
+    $open_ticket_num = parent::mpull($this->list, 'checkTicket' , null);
    
  
     if($open_ticket_num < 3){
@@ -61,7 +56,16 @@ class PostsController extends AppController {
 	
 
 	$tickets->union($union_query);
-	
+	//unionのパラメータがなければ、esort()をAppControllerに実装する
+		/*esort($entity , $sort_key)
+			$entity    : find()の結果セット
+			$sort_key  : sortの方法
+			$order:    : ASC , DESC
+
+			return     :sortされたentity
+		*/
+	//$tickets->order(['last_update' => 'DESC']);
+	//$tickets->union($union_query , array([order] => 'last_update' => 'DESC'));
 
     }
  
