@@ -19,8 +19,8 @@ class TicketsController extends AppController {
 
     //debug($this->Auth->user());
 
-    $arr = parent::mpull($this->list , 'getId');    
-    $commit_num = parent::mpull($this->list,'getCommitNumber');    
+    $arr = parent::mpull($this->list , 'getId' , null);    
+    $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
 
     $tickets = $this->Ticket->find()
 	->where(['Tickets.id' => $arr[0]])->contain(['Posts']);

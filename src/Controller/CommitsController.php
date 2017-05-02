@@ -18,12 +18,13 @@ class CommitsController extends AppController {
   public function detail() {
  
 
-    $arr = parent::mpull($this->list , 'getId');    
-    $commit_num = parent::mpull($obj_list,'getCommitNumber');    
-    
+    $arr = parent::mpull($this->list , 'getId' , null);    
+    $c_id = parent::mpull($this->list , 'getCommitId', null );    
+    $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
+    $branch = parent::mpull($this->list,'getBranch' , null);    
+   
     $ticket_id = $arr[0];    
     
-    $c_id = $id->getCommitId(Router::reverse($this->request));    
     
 
     $tickets = $this->Ticket->find()
@@ -53,9 +54,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     }
     
     $commit_arr = $arr[1];    
-    $commit_num = $commit->getCommitNumber();
 
-    $branch = $commit->getBranch();
 
 
     if(isset($commit_arr) || isset($commit_num) || isset($branch)){
@@ -82,7 +81,9 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     if(isset($commit_arr[$c_id_key + 1])){
 	 
 	$diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
-    	$commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+    	//$commit_file_diff = $commit->getCommitFileDiff($c_id , $diff_commit_arr[0]);   
+        $arr_file_diff = [$c_id , $diff_commit_arr[0]];
+        $commit_file_diff = parent::mpull($this->list,'getCommitFileDiff' , $arr_file_diff);    
     	
 	$commit_file_diff_detail = $commit->getCommitFileDiffDetail($c_id , $diff_commit_arr[0]);   
     

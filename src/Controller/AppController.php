@@ -86,7 +86,6 @@ class AppController extends Controller
         $commit = new GetCommitController();
     	
 	$obj_list = [$id , $commit , $check_ticket];
-	//$obj_list = [$id , $check_ticket];
         
 	$this->list = $obj_list;
     
@@ -118,8 +117,9 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
-   
-    protected function mpull($list , String $method){
+
+ 
+    protected function mpull($list , String $method , $parameter){
         
 	$arr = array();
 
@@ -138,8 +138,7 @@ class AppController extends Controller
 
 		}elseif(strcmp($method , 'getCommitId') === 0){
 			$commit_id = $obj->getCommitId(Router::reverse($this->request));
-			//return $commit_id;
-			array_push($arr , $commit_id);
+			return $commit_id;
 			
 		}
 	   }elseif($obj instanceof GetCommitController){
@@ -147,13 +146,13 @@ class AppController extends Controller
 			$commit_arr = $obj->getId(1,30);
 
 			array_push($arr , $commit_arr);
-		}
-
-		if(strcmp($method , 'getCommitNumber') === 0){
+		}elseif(strcmp($method , 'getCommitNumber') === 0){
 			$commit_num = $obj->getCommitNumber();
 
 			array_push($arr , $commit_num);
 
+		}elseif(strcmp($method , 'getCommitFileDiff') === 0){
+		        $file_diff = $obj->getCommitFileDiff($parameter);		
 		}
 	   }
 	}

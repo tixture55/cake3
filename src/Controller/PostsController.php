@@ -39,7 +39,7 @@ class PostsController extends AppController {
 		->limit(5);
 
   
-    $open_ticket_num = parent::mpull($this->list, 'checkTicket');
+    $open_ticket_num = parent::mpull($this->list, 'checkTicket' , null);
    
  
     if($open_ticket_num < 3){
