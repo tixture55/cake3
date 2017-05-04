@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use Cake\ORM\TableRegistry;
+use Cake\Datasource\ConnectionManager; 
 
 final class InsertPostController extends InsertController{
 
@@ -28,13 +29,35 @@ final class InsertPostController extends InsertController{
 		$this->reply->posts_id = $ticket_id;
 		$this->reply->last_update = date('Y/m/d H:i:s');
 		
-		if($ticket_replies->count() > 0){
 		
-		}else{
-		 	//ticketsテーブル、ticket_repliesテーブル両方にsaveできるように書き換える
-			//$this->Ticket->save($this->reply);
-		 	$this->Ticket_replies->save($this->reply);
-		}
+		 	if($this->Ticket_replies->save($this->reply)){
+	
+				$connection = ConnectionManager::get('default');
+				$connection->begin();
+
+				try{
+					//ticketsテーブル、ticket_repliesテーブル両方にsaveできるように書き換える
+					//$this->Ticket->save($this->reply);
+					if($this->Ticket_replies->save($this->reply)){
+						if($this->reply->status ==='close'){
+							$this->Ticket = TableRegistry::get('Tickets');
+							$query = $this->Ticket->query();
+							$query->update()
+								->set(['status' => 'close'])
+								->where(['id' => $ticket_id])
+								->execute();
+
+							$this->Ticket->connection()->commit();
+
+						}
+					}
+
+				} catch(Exception $e){
+
+					$this->Flash->error($e);
+					$connection->rollback(); //ロールバック
+				}
+			}
 	}
 	
         public function postTicket($req){

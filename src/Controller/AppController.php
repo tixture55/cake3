@@ -168,8 +168,10 @@ class AppController extends Controller
     }
  
     private function _getTitle(){
-        $view = strstr(Router::reverse($this->request) , "cake3/");               $view = str_replace("cake3/" , "" , $view);
-        if(strpos($view , "/" , 0)) $view = strstr($view,"/", TRUE);
+        $view = strstr(Router::reverse($this->request) , "cake3/");               
+	$view = str_replace("cake3/" , "" , $view);
+        
+	if(strpos($view , "/" , 0)) $view = strstr($view,"/", TRUE);
         if(strpos($view , "?" , 0)) $view = strstr($view,"?", TRUE);
       
         $list = new TicketFormEditController(); 
