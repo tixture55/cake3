@@ -120,7 +120,7 @@ if($ticket_replies){
 				<dt class="phui-property-list-key">
 					<?php 
 	foreach ($ticket_replies as $this->value) {
-             echo $this->value['target_name'].": ".$this->value['details'];
+             echo htmlspecialchars($this->value['target_name'] ,ENT_QUOTES , 'UTF-8').": ".htmlspecialchars($this->value['details'] , ENT_QUOTES , 'UTF-8');
 	     echo '<br>';
 	     echo '<hr>';
         }
@@ -174,11 +174,17 @@ echo $this->Form->input('status',
 			'options'=>$items));
 echo $this->Form->input(
                  'detail',
-                 ['placeholder' => '内容を入力してください', 'label' => '内容']		 
+		 array('maxlength'=>400,
+		       'placeholder' => '内容を入力してください',
+		       'label' => '内容'
+		)
                  );
  echo $this->Form->input(
                  'target_name',
-                 ['placeholder' => '担当者を入力してください', 'label' => '担当者']		 
+		 array('maxlength'=>10,
+		       'placeholder' => '担当者を入力してください',
+		       'label' => '担当者'
+		)
 		 
                  );
 echo $this->Form->submit(__(' reply ',true),array(

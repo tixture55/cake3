@@ -36,8 +36,6 @@ final class InsertPostController extends InsertController{
 				$connection->begin();
 
 				try{
-					//ticketsテーブル、ticket_repliesテーブル両方にsaveできるように書き換える
-					//$this->Ticket->save($this->reply);
 					if($this->Ticket_replies->save($this->reply)){
 						if($this->reply->status ==='close'){
 							$this->Ticket = TableRegistry::get('Tickets');
