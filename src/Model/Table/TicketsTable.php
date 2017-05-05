@@ -13,7 +13,7 @@ class TicketsTable extends Table {
             		'foreignKey' => 'posts_id'
         	]);
         }
-	/*public function validationDefault(Validator $validator)
+	public function validationDefault(Validator $validator)
 	{
 		$validator
 			//notEmptyの記述。第二引数はメッセージ
@@ -25,7 +25,7 @@ class TicketsTable extends Table {
 			])
 			;
 		return $validator;
-	}*/
+	}
 	public $validate = [
         'detail' => [
             [
