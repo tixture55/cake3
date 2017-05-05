@@ -18,8 +18,7 @@ use Cake\Event\Event;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 use Cake\ORM\TableRegistry;
-
-
+use Cake\Http\ServerRequest;
 
 /**
  * Application Controller
@@ -88,7 +87,10 @@ class AppController extends Controller
 	$obj_list = ['id' => $id , 'commit' => $commit , 'check_ticket' => $check_ticket];
         
 	$this->list = $obj_list;
-    
+	$host = $this->request->env('HTTP_HOST');   
+	$page = $this->request->getQuery('ticket_id');
+	$isPost = $this->request->is('post');
+	echo $isPost; 
     }
      
       public function isAuthorized($user) /* add */

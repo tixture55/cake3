@@ -23,11 +23,10 @@ class CommitsController extends AppController {
     $c_id = parent::mpull($this->list , 'getCommitId', null );    
     $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
     $branch = parent::mpull($this->list,'getBranch' , null);    
+
    
     $ticket_id = $arr[0];    
     
-    
-
     $tickets = $this->Ticket->find()
 	->where(['Tickets.id' => $ticket_id])->contain(['Posts']);
     
@@ -43,12 +42,10 @@ class CommitsController extends AppController {
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
   
-    foreach($ticket_replies as $val){
-
-	//echo $val['details'];	
-    }
  
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
+    
+    
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
     
 
@@ -60,7 +57,6 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     }
     
     $commit_arr = $arr[1];    
-
 
 
     if(isset($commit_arr) || isset($commit_num) || isset($branch)){
@@ -75,6 +71,11 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     		return preg_match($regex, $value);
 	});
     $c_id_key = key($c_id_arr);
+    
+    //マージコミットかどうかの判定
+    if(preg_match('/Merge pull request/' , $c_id_arr[$c_id_key]) === 1){
+	$merge_pull_request = true;
+    }
     //配列の最後にきた場合の処理が必要
 
 
@@ -84,10 +85,10 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 
 
     if(isset($commit_arr[$c_id_key + 1])){
-	 
+	
 	$diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
         $arr_file_diff = [$c_id , $diff_commit_arr[0]];
-        
+	
 	$commit_file_diff = parent::mpull($this->list,'getCommitFileDiff' , $arr_file_diff);    
         $commit_file_diff_detail = parent::mpull($this->list,'getCommitFileDiffDetail' , $arr_file_diff);    
     	
@@ -96,32 +97,32 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 	$commit_file_diff = "target commit is nothing";	
     }
 
-if(isset($commit_file_diff)){
+    if(isset($commit_file_diff)){
 
-        //print_r($commit_file_diff);	
-	$regex = "/\//";
-	$diff_filter_arr = array();
-	$diff_sep_arr = explode(" " , $commit_file_diff);
-	$diff_filter_arr = array_filter($diff_sep_arr, function($value) use($regex) {
-    		return preg_match($regex, $value);
-	});
-	
-        //swapファイルの除外
-        $regex = "/sw/";
-        $drop_filter_arr = array_filter($diff_filter_arr, function($value) use($regex) {
-    		return preg_match($regex, $value);
-	});
-        $diff_filter_arr = array_diff_assoc($diff_filter_arr , $drop_filter_arr);
-    
-        $this->set('diff_files', $diff_filter_arr);
+	    $regex = "/\//";
+	    $diff_filter_arr = array();
+	    $diff_sep_arr = explode(" " , $commit_file_diff);
+	    $diff_filter_arr = array_filter($diff_sep_arr, function($value) use($regex) {
+			    return preg_match($regex, $value);
+			    });
 
-}else{
-        throw new NotFoundException(__('git diffコマンドエラー'));
+	    //swapファイルの除外
+	    $regex = "/sw/";
+	    $drop_filter_arr = array_filter($diff_filter_arr, function($value) use($regex) {
+			    return preg_match($regex, $value);
+			    });
+	    $diff_filter_arr = array_diff_assoc($diff_filter_arr , $drop_filter_arr);
+
+	    $this->set('diff_files', $diff_filter_arr);
 	
-}
+    }elseif($merge_pull_request){
+	    
+    }else{
+	    throw new NotFoundException(__('git diffコマンドエラー'));
+
+    }
          
 if(isset($commit_file_diff_detail)){
-	//echo $commit_file_diff_detail;
 
 	$diff_sep_arr = explode(" " , $commit_file_diff_detail);
         //swapファイルの除外
@@ -142,7 +143,7 @@ if(isset($commit_file_diff_detail)){
 	$replace_br = preg_replace("/this/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
 	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
+	//$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
 
 }
     $titles = $this->viewVars['titles'];
