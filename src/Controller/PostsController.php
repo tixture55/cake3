@@ -2,11 +2,8 @@
 
 //CakePHP3のPostsController.php
 namespace App\Controller;
-use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
-use App\Utils\AppUtility;
-use App\Controller\Component\MethodPullComponent;
 
 class PostsController extends AppController {
  

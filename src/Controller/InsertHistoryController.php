@@ -20,8 +20,16 @@ final class InsertHistoryController extends InsertController{
 		
 		if($this->Ticket_read_histories->save($this->reply) === false){
 			//エラー処理
-			return;
+			return false;
 		}
+	}
+	public function selectTicketsForTest(){
+		//$this->Ticket->hydrate(false);
+ 	        $arr = $this->Ticket->find()
+                          ->select(['id'])
+                          ->toList();
+
+		return $arr;
 	}
 	
 
