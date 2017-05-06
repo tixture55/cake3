@@ -132,19 +132,9 @@ if(isset($commit_file_diff_detail)){
 	});
         $diff_filter_arr = array_diff_assoc($diff_sep_arr , $drop_filter_arr);
 	$trimed_swp_diff = implode(" ", $diff_filter_arr);
-	$replace_br = str_replace("@@", "<br><br>", $trimed_swp_diff);
-	$replace_br = str_replace("+", "<br><div class=\"plus\">+", $replace_br);
-	
-	$replace_br = str_replace(");", ");</div><br>", $replace_br);
-	$replace_br = preg_replace("/class[^=]/", "<font color=\"green\">class </font>", $replace_br);
-	$replace_br = preg_replace("/abstract|protected|public|return|extends|final|new/", "<font color=\"green\">$0 </font>", $replace_br);
-	$replace_br = preg_replace("/\&|\-/", "<font color=\"red\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/true|DESC/", "<font color=\"red\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/this/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
 	//$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
 
+	$replace_br = $this->colorScheme($trimed_swp_diff);
 }
     $titles = $this->viewVars['titles'];
     $this->set(compact('titles','replace_br','commit_detail'));

@@ -18,7 +18,10 @@ final class InsertHistoryController extends InsertController{
 		$this->reply->posts_id = $ticket_id;
 		$this->reply->last_update = date('Y/m/d H:i:s');
 		
-		$this->Ticket_read_histories->save($this->reply);
+		if($this->Ticket_read_histories->save($this->reply) === false){
+			//エラー処理
+			return;
+		}
 	}
 	
 
