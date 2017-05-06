@@ -35,4 +35,12 @@ class GetCommitControllerTest extends IntegrationTestCase
     	$test = new GetCommitController();
 	$this->assertInternalType("int", $test->getCommitNumber());
     }
+
+    public function testGetBranch()
+    {
+    	
+    	$test = new GetCommitController();
+	$this->assertNotNull($test->getBranch());
+
+    }
 }
