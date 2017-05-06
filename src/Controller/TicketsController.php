@@ -3,14 +3,24 @@
 //CakePHP3のPostsController.php
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
+use App\Collection\LaravelCollection;
+use App\Collection\LaravelSetTicketCollection;
 
 class TicketsController extends AppController {
  
  
+  
+  protected $ticket_type;
+  protected $ticket_association_type;
+  protected $ticket_cardinal_level;
+
+
   public function initialize()
     {
         parent::initialize();
     	
+	$ticketKey = 0;
+	$property = new LaravelSetTicketCollection($this ,$ticketKey);
     }
   
   public function detail() {

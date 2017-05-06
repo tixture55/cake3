@@ -1,0 +1,17 @@
+<?php
+namespace App\Collection;
+use App\Controller\TicketsController;
+
+
+class LaravelCollection
+{
+
+    protected $_ticket;
+    protected $_ticketProperty;
+	
+    public function __construct($ticket){
+
+	$this->_ticket = $ticket;
+        $this->_ticketProperty = $ticket->toList();
+    }
+}

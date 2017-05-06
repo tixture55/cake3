@@ -1,0 +1,120 @@
+<?php
+namespace App\Collection;
+
+
+/**
+ * LaravelCollection Controller
+ *
+ * @property \App\Model\Table\LaravelCollectionTable $LaravelCollection
+ */
+class LaravelSetTicketCollection extends LaravelCollection
+{
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function __construct(obj $ticket , $ticketKey){
+
+	parent::__construct($ticket);
+	$this->setTicketBasedata($ticketKey);
+    }
+
+
+
+
+    public function setTicketBasedata($enable)
+    {
+    	if($enable === true) {
+		$enable = '_laravel_ticket_';
+        }
+	
+	$this->_ticket_pattern = $enable;
+
+	return $this;
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Laravel Collection id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function view($id = null)
+    {
+        $laravelCollection = $this->LaravelCollection->get($id, [
+            'contain' => []
+        ]);
+
+        $this->set('laravelCollection', $laravelCollection);
+        $this->set('_serialize', ['laravelCollection']);
+    }
+
+    /**
+     * Add method
+     *
+     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function add()
+    {
+        $laravelCollection = $this->LaravelCollection->newEntity();
+        if ($this->request->is('post')) {
+            $laravelCollection = $this->LaravelCollection->patchEntity($laravelCollection, $this->request->getData());
+            if ($this->LaravelCollection->save($laravelCollection)) {
+                $this->Flash->success(__('The laravel collection has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The laravel collection could not be saved. Please, try again.'));
+        }
+        $this->set(compact('laravelCollection'));
+        $this->set('_serialize', ['laravelCollection']);
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Laravel Collection id.
+     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function edit($id = null)
+    {
+        $laravelCollection = $this->LaravelCollection->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $laravelCollection = $this->LaravelCollection->patchEntity($laravelCollection, $this->request->getData());
+            if ($this->LaravelCollection->save($laravelCollection)) {
+                $this->Flash->success(__('The laravel collection has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The laravel collection could not be saved. Please, try again.'));
+        }
+        $this->set(compact('laravelCollection'));
+        $this->set('_serialize', ['laravelCollection']);
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id Laravel Collection id.
+     * @return \Cake\Network\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $laravelCollection = $this->LaravelCollection->get($id);
+        if ($this->LaravelCollection->delete($laravelCollection)) {
+            $this->Flash->success(__('The laravel collection has been deleted.'));
+        } else {
+            $this->Flash->error(__('The laravel collection could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+}
