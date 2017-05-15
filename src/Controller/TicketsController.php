@@ -10,17 +10,12 @@ class TicketsController extends AppController {
  
  
   
-  protected $ticket_type;
-  protected $ticket_association_type;
-  protected $ticket_cardinal_level;
 
 
   public function initialize()
     {
         parent::initialize();
     	
-	$ticketKey = 0;
-	$property = new LaravelSetTicketCollection($this ,$ticketKey);
     }
   
   public function detail() {
