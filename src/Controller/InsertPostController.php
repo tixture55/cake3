@@ -78,7 +78,7 @@ final class InsertPostController extends InsertController{
 		$this->reply->target_name = $req->data('target_name');
 		$this->reply->last_update = date('Y/m/d H:i:s');
 		$this->reply->deadline = date('Y/m/d H:i:s');
-		
+		//test		
 		if($tickets->count() > 0){
 		
 		}else{
