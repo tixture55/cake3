@@ -8,9 +8,6 @@ use App\Collection\LaravelSetTicketCollection;
 
 class TicketsController extends AppController {
  
- 
-  
-
 
   public function initialize()
     {
@@ -22,9 +19,7 @@ class TicketsController extends AppController {
  
    
     unset($this->list['check_ticket']);
-
-    //debug($this->Auth->user());
-
+    $this->Ticket->checkDuplicates();
     $arr = parent::mpull($this->list , 'getId' , null);    
     $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
 

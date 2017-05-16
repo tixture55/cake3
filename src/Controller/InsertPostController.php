@@ -58,7 +58,7 @@ final class InsertPostController extends InsertController{
 			}
 	}
 	
-        public function postTicket($req){
+        public function postTicket($req , int $user_id){
 
 		$this->reply->task_id = $req->data('works'); 
 		$this->reply->posts_id = $req->data('works'); 
@@ -78,14 +78,32 @@ final class InsertPostController extends InsertController{
 		$this->reply->target_name = $req->data('target_name');
 		$this->reply->last_update = date('Y/m/d H:i:s');
 		$this->reply->deadline = date('Y/m/d H:i:s');
-		//test		
+		
 		if($tickets->count() > 0){
 		
 		}else{
-		 	$this->Ticket->save($this->reply);
-		}
-				
-		return $this->reply;
+
+            try {
+                $connection = ConnectionManager::get('default');
+                $connection->begin();
+
+                if ($this->Ticket->save($this->reply)) {
+
+                    $this->Developer_status = TableRegistry::get('Developer_statuses');
+                    $this->reply->modified = date('Y/m/d H:i:s');
+                    $this->reply->developer_id = $user_id;
+
+                    if ($this->Developer_status->save($this->reply)) {
+                        phpinfo();
+                        $this->Developer_status->connection()->commit();
+                    }
+                }
+            }catch(Exception $e){
+                $this->Flash->error($e);
+                $connection->rollback(); //ロールバック
+            }
+        }
+
 	}
 
 

@@ -87,10 +87,6 @@ class AppController extends Controller
 	$obj_list = ['id' => $id , 'commit' => $commit , 'check_ticket' => $check_ticket];
         
 	$this->list = $obj_list;
-	$host = $this->request->env('HTTP_HOST');   
-	$page = $this->request->getQuery('ticket_id');
-	$isPost = $this->request->is('post');
-	echo $isPost; 
     }
      
       public function isAuthorized($user) /* add */
@@ -169,23 +165,6 @@ class AppController extends Controller
 	return $arr;
     }
 
-    protected function colorScheme(String $source_code){
-	
-	$replace_br = str_replace("@@", "<br><br>", $source_code);
-	$replace_br = str_replace("+", "<br><div class=\"plus\">+", $replace_br);
-	
-	$replace_br = str_replace(");", ");</div><br>", $replace_br);
-	$replace_br = preg_replace("/class[^=]/", "<font color=\"green\">class </font>", $replace_br);
-	$replace_br = preg_replace("/abstract|protected|public|return|extends|final|new/", "<font color=\"green\">$0 </font>", $replace_br);
-	$replace_br = preg_replace("/\&|\-/", "<font color=\"red\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/true|DESC/", "<font color=\"red\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/this/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\+/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\/\/.*/", "<font color=\"blue\">$0</font>", $replace_br);
-	$replace_br = preg_replace("/\/\*.*/", "<font color=\"blue\">$0</font>", $replace_br);
-
-        return $replace_br;
-    }
 
  
     private function _getTitle(){

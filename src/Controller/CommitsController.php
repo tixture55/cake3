@@ -134,7 +134,7 @@ if(isset($commit_file_diff_detail)){
 	$trimed_swp_diff = implode(" ", $diff_filter_arr);
 	//$replace_br = preg_replace("/\+.*/", "<div style=\"background-color:#EDF7FF;\">$0</div>", $replace_br);
 
-	$replace_br = $this->colorScheme($trimed_swp_diff);
+	$replace_br = $this->Commit->colorScheme($trimed_swp_diff);
 }
     $titles = $this->viewVars['titles'];
     $this->set(compact('titles','replace_br','commit_detail'));

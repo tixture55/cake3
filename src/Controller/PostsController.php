@@ -33,6 +33,13 @@ class PostsController extends AppController {
     unset($this->list['id']);
     unset($this->list['commit']);
 
+      //debug($this->Auth->user());
+    //print_r($this->Auth->user());
+    if($this->Auth->user()['id'] === 4){
+        echo 'ようこそ！白石さん';
+        $session = $this->request->session();
+        $session->write('user_id', $this->Auth->user()['id'] );
+    }
     $posts = $this->Post->find()->all();
     $tickets = $this->Ticket->find()
 		->order(['last_update' => 'DESC'])
@@ -75,9 +82,9 @@ class PostsController extends AppController {
     $this->set(compact("posts","users", "tasks", "tickets","titles"));
     
     if(isset($_POST['send']) && $this->request->data('detail')){
-	$ins = new InsertPostController();
-        $ins->postTicket($this->request);     
-    
+	//$ins = new InsertPostController();
+        //$ins->postTicket($this->request , $this->Auth->user()['id'] );
+        $this->Post->postTicket($this->request , $this->Auth->user()['id'] );
     }
   
   }
