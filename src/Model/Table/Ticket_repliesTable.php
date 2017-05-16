@@ -7,7 +7,7 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use App\Event\ContactsListener;
 
-class TicketsTable extends Table {
+class Ticket_repliesTable extends Table {
 
 	public function initialize(array $config)
         {
@@ -38,9 +38,15 @@ class TicketsTable extends Table {
 		$validator
 			//notEmptyの記述。第二引数はメッセージ
 			->requirePresence('detail')
-            ->notEmpty('detail', 'detail must be written.')
-            ->notEmpty('target_name', 'target_name must be written.');
-
+            ->notEmpty('detail', 'required mail');
+			//メール形式のチェック
+			/*->add('detail', 'validFormat', [
+					'rule' => 'email',
+					'message' => 'E-mail must be valid'
+			])*/
+        $errors = [
+            'detail' => ['please enter detail.']
+        ];
 		return $validator;
 	}
 }

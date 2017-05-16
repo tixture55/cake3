@@ -61,7 +61,11 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $titles = $this->viewVars['titles'];
     $this->set(compact('posts','tickets','ticket_replies','commits','commit_num',"commit_arr","titles"));
     
-    if($this->request->data('detail')){
+    if($this->request->data){
+        $reply_data = $this->Ticket->newEntity($this->request->getData());
+
+        $this->set(compact(["reply_data"]));
+
         $ins = new InsertPostController();
         $ins->postTicketReply($this->request , $ticket_id);     
     

@@ -162,7 +162,13 @@ if($commit_arr){
 
 <?php echo '<div id="main">';
 
-echo $this->Form->create('Tickets', array('url' => '/tickets/detail?ticket_id='.$ticket_id,'method' => 'post'));
+//echo $this->Form->create('Tickets', array('url' => '/tickets/detail?ticket_id='.$ticket_id,'method' => 'post'));
+if(isset($reply_data)){
+    echo $this->Form->create($reply_data , array('method' => 'post'));
+}else{
+    echo $this->Form->create('Tickets', array('url' => '/tickets/detail?ticket_id='.$ticket_id,'method' => 'post'));
+
+}
  echo $this->Form->hidden(
                  'trans_status' ,
                  array('value' => 0)

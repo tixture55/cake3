@@ -41,7 +41,7 @@ class CommitsController extends AppController {
     }
 
 $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id' => $ticket_id]);
-  
+
  
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
     
@@ -88,17 +88,14 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
 	
 	$diff_commit_arr = explode(" " , $commit_arr[$c_id_key + 1]);
         $arr_file_diff = [$c_id , $diff_commit_arr[0]];
-	
-	$commit_file_diff = parent::mpull($this->list,'getCommitFileDiff' , $arr_file_diff);    
+	$commit_file_diff = parent::mpull($this->list,'getCommitFileDiff' , $arr_file_diff);
         $commit_file_diff_detail = parent::mpull($this->list,'getCommitFileDiffDetail' , $arr_file_diff);    
-    	
-    
+
     }else{
 	$commit_file_diff = "target commit is nothing";	
     }
 
     if(isset($commit_file_diff)){
-
 	    $regex = "/\//";
 	    $diff_filter_arr = array();
 	    $diff_sep_arr = explode(" " , $commit_file_diff);
@@ -140,7 +137,7 @@ if(isset($commit_file_diff_detail)){
     $this->set(compact('titles','replace_br','commit_detail'));
     
     if($this->request->data('detail')){
-        $ins = new InsertController();
+        $ins = new InsertPostController();
         $ins->postTicketReply($this->request , $ticket_id);     
     
     }

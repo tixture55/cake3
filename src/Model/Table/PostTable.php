@@ -4,9 +4,6 @@
 namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\TableRegistry;
-use Cake\Datasource\ConnectionManager;
-
 
 class PostsTable extends Table {
 	public function initialize(array $config)
@@ -18,19 +15,7 @@ class PostsTable extends Table {
 
     public function postTicket($req , int $user_id){
 
-        $this->Ticket = TableRegistry::get('Tickets');
-
-        $ticket_post = $this->Ticket->newEntity();
-        $this->reply = $ticket_post;
-
-        $this->Developer_status = TableRegistry::get('Developer_statuses');
-
-        $develop_status = $this->Developer_status->newEntity();
-        $this->develop = $develop_status;
-
-
-
-	    $this->reply->task_id = $req->data('works');
+        $this->reply->task_id = $req->data('works');
         $this->reply->posts_id = $req->data('works');
         $this->reply->details = $req->data('detail');
 
@@ -59,13 +44,12 @@ class PostsTable extends Table {
 
                 if ($this->Ticket->save($this->reply)) {
 
-                    $this->develop->name = 'testuser';
-                    $this->develop->modified = date('Y/m/d H:i:s');
-                    $this->develop->created = date('Y/m/d H:i:s');
+                    $this->Developer_status = TableRegistry::get('Developer_statuses');
+                    $this->reply->modified = date('Y/m/d H:i:s');
+                    $this->reply->developer_id = $user_id;
 
-                    $this->develop->developer_id = $user_id;
-
-                    if ($this->Developer_status->save($this->develop)) {
+                    if ($this->Developer_status->save($this->reply)) {
+                        phpinfo();
                         $this->Developer_status->connection()->commit();
                     }
                 }
