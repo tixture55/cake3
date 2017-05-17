@@ -19,7 +19,8 @@ class TicketsTable extends Table {
             $this->eventManager()->on($listener);
         }
 
-
+    public function beforeFind(Event $event , $entity , $options) {
+    }
 
     public function checkDuplicates()
     {
@@ -40,7 +41,6 @@ class TicketsTable extends Table {
 			->requirePresence('detail')
             ->notEmpty('detail', 'detail must be written.')
             ->notEmpty('target_name', 'target_name must be written.');
-
 		return $validator;
 	}
 }

@@ -3,8 +3,7 @@
 //CakePHP3のPostsController.php
 namespace App\Controller;
 use Cake\Network\Exception\NotFoundException;
-use App\Collection\LaravelCollection;
-use App\Collection\LaravelSetTicketCollection;
+use Cake\Event\Event;
 
 class TicketsController extends AppController {
  
@@ -16,14 +15,14 @@ class TicketsController extends AppController {
     }
   
   public function detail() {
- 
-   
-    unset($this->list['check_ticket']);
-    $this->Ticket->checkDuplicates();
-    $arr = parent::mpull($this->list , 'getId' , null);    
-    $commit_num = parent::mpull($this->list,'getCommitNumber' , null);    
 
-    $tickets = $this->Ticket->find()
+
+      unset($this->list['check_ticket']);
+      $this->Ticket->checkDuplicates();
+      $arr = parent::mpull($this->list , 'getId' , null);
+      $commit_num = parent::mpull($this->list,'getCommitNumber' , null);
+
+      $tickets = $this->Ticket->find()
 	->where(['Tickets.id' => $arr[0]])->contain(['Posts']);
     
     if($tickets){
@@ -54,7 +53,7 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $commits = $this->Commit->find()->where(['Commits.posts_id' => $posts_id])->contain(['Posts']);
     
     $posts = $this->Post->find()->where(['Posts.id' => $posts_id])->contain(['Tickets']);
- 
+
     $commit_arr = $arr[1];
     
 

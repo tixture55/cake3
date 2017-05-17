@@ -79,8 +79,11 @@ class AppController extends Controller
         $title_arr = array();
 
         $this->set('titles', $this->_getTitle());
-    	
-	$check_ticket = new CheckTicketController();
+
+        $instance = Singleton::getInstance();
+        echo $instance->getId();
+
+        $check_ticket = new CheckTicketController();
         $id = new GetIdFromUrlController();
         $commit = new GetCommitController();
     	
@@ -181,4 +184,6 @@ class AppController extends Controller
         if(isset($title) && isset($view)) array_push($titles,$view);
         return $titles; 
     }
+
+
 }
