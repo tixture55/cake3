@@ -21,6 +21,10 @@ final class InsertPostController extends InsertController{
 
     		$ticket_replies = $this->Ticket_replies->find()
 			->where(['Ticket_replies.details' => $this->reply->details]);
+		
+		$arr = $ticket_replies->hydrate(false)->toArray();	
+
+	
 		if($req->data('status') == 0){
 			$this->reply->status = "open";
 		}else{
@@ -31,25 +35,23 @@ final class InsertPostController extends InsertController{
 		$this->reply->posts_id = $ticket_id;
 		$this->reply->last_update = date('Y/m/d H:i:s');
 		
-		
+		if(!isset($arr[0]['details'])){
 		 	if($this->Ticket_replies->save($this->reply)){
 	
 				$connection = ConnectionManager::get('default');
 				$connection->begin();
 
 				try{
-					if($this->Ticket_replies->save($this->reply)){
-						if($this->reply->status ==='close'){
-							$this->Ticket = TableRegistry::get('Tickets');
-							$query = $this->Ticket->query();
-							$query->update()
-								->set(['status' => 'close'])
-								->where(['id' => $ticket_id])
-								->execute();
+					if($this->reply->status ==='close'){
+						$this->Ticket = TableRegistry::get('Tickets');
+						$query = $this->Ticket->query();
+						$query->update()
+							->set(['status' => 'close'])
+							->where(['id' => $ticket_id])
+							->execute();
 
-							$this->Ticket->connection()->commit();
+						$this->Ticket->connection()->commit();
 
-						}
 					}
 
 				} catch(Exception $e){
@@ -58,6 +60,7 @@ final class InsertPostController extends InsertController{
 					$connection->rollback(); //ロールバック
 				}
 			}
+		}
 	}
 	
 

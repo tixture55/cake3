@@ -81,7 +81,7 @@ class AppController extends Controller
         $this->set('titles', $this->_getTitle());
 
         $instance = Singleton::getInstance();
-        echo $instance->getId();
+        //echo $instance->getId();
 
         $check_ticket = new CheckTicketController();
         $id = new GetIdFromUrlController();
