@@ -4,8 +4,6 @@ namespace App\Controller;
 final class TicketFormEditController extends PanelEditController{
 
 	protected $task_flg;
-
-        //画面によって、セットするタイトルを変える
 	
 
 	public function setTicketForm(String $view){
