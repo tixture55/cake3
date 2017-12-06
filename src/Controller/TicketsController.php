@@ -108,19 +108,11 @@ $ticket_replies = $this->Ticket_replies->find()->where(['Ticket_replies.posts_id
     $this->set(compact('posts','tickets','ticket_replies','commits','commit_num',"commit_arr","titles"));
     
     if($this->request->data){
-
-        //dump($this->request->data);
+	    
         $path = '/var/www/html/cake3/webroot/img';
-        //$img = file_get_contents($this->request->data['img']);
-        //echo $img;
+        
         move_uploaded_file( $path . DS . $this->request->data['img']);
-        //$value1='/test_pic';
-        //$value2=array('img' =>$img);
-        /*$result= $this->Curl->curl2($value1,$value2);
-        header('Content-type: image/png');
-        echo base64_decode($result);
-*/
-
+        
 
         $reply_data = $this->Ticket->newEntity($this->request->getData());
 
