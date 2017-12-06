@@ -8,8 +8,6 @@ final class GetIdFromUrlController extends GetIdController{
 	protected $commit_id;
 	protected $url;
 
-
-        //画面によって、セットするタイトルを変える
 	public function getId(String $url){
 	   
 	   $ticket_id = strstr($url , "ticket_id=");
