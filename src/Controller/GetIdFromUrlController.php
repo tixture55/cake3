@@ -18,7 +18,8 @@ final class GetIdFromUrlController extends GetIdController{
 	   
 	   $this->ticket_id = $url_arr[0];
           
-		return $this->ticket_id;
+           return $this->ticket_id;
+	
 	}
 	
 	public function getCommitId(String $url){
