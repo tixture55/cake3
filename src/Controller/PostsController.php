@@ -33,8 +33,6 @@ class PostsController extends AppController {
     unset($this->list['id']);
     unset($this->list['commit']);
 
-      //debug($this->Auth->user());
-    //print_r($this->Auth->user());
     if($this->Auth->user()['id'] === 4){
         echo 'ようこそ！白石さん';
         $session = $this->request->session();
