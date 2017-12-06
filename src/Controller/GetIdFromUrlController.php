@@ -31,7 +31,9 @@ final class GetIdFromUrlController extends GetIdController{
 	   $this->commit_id = $url_arr[1];
            $this->commit_id = strstr($this->commit_id  , "commit_id=");
 	   $this->commit_id = str_replace("commit_id=" , "" , $this->commit_id);
-		return $this->commit_id;
+		
+	   return $this->commit_id;
+	
 	}
 	
 
